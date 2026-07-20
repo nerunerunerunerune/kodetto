@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ja"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>こでっと｜正規表現テスト・進数変換・Unix時間・JWTデコードの無料開発ツール</title><meta name="description" content="正規表現テスト、進数変換、Unix時間変換、カラーコード変換、JWTデコード、cron式の解説。開発の“ちょっと”をその場で片づける無料ツール集。登録不要・すべて端末内処理。">
+<link rel="canonical" href="https://kodetto.kawatare.studio/"><meta name="theme-color" content="#4f6ef7">
+<link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="manifest" href="site.webmanifest">
+<meta property="og:type" content="website"><meta property="og:site_name" content="こでっと">
+<meta property="og:title" content="こでっと｜正規表現テスト・進数変換・Unix時間・JWTデコードの無料開発ツール"><meta property="og:description" content="正規表現テスト、進数変換、Unix時間変換、カラーコード変換、JWTデコード、cron式の解説。開発の“ちょっと”をその場で片づける無料ツール集。登録不要・すべて端末内処理。">
+<meta property="og:url" content="https://kodetto.kawatare.studio/"><meta property="og:image" content="https://kodetto.kawatare.studio/ogp.png">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="こでっと｜正規表現テスト・進数変換・Unix時間・JWTデコードの無料開発ツール"><meta name="twitter:description" content="正規表現テスト、進数変換、Unix時間変換、カラーコード変換、JWTデコード、cron式の解説。開発の“ちょっと”をその場で片づける無料ツール集。登録不要・すべて端末内処理。"><meta name="twitter:image" content="https://kodetto.kawatare.studio/ogp.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"こでっと","url":"https://kodetto.kawatare.studio/","description":"正規表現・進数・Unix時間・カラー・JWT・cronなど、開発の“ちょっと”を助ける無料ツール集。"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"ItemList","itemListElement":[{"@type":"ListItem","position":1,"name":"正規表現テスト","url":"https://kodetto.kawatare.studio/tool-regex.html"},{"@type":"ListItem","position":2,"name":"進数変換","url":"https://kodetto.kawatare.studio/tool-radix.html"},{"@type":"ListItem","position":3,"name":"Unix時間変換","url":"https://kodetto.kawatare.studio/tool-unixtime.html"},{"@type":"ListItem","position":4,"name":"カラーコード変換","url":"https://kodetto.kawatare.studio/tool-color.html"},{"@type":"ListItem","position":5,"name":"JWTデコード","url":"https://kodetto.kawatare.studio/tool-jwt.html"},{"@type":"ListItem","position":6,"name":"cron式の解説","url":"https://kodetto.kawatare.studio/tool-cron.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"こでっとはどんなサイトですか？","acceptedAnswer":{"@type":"Answer","text":"正規表現テスト・進数変換・Unix時間変換・カラーコード変換・JWTデコード・cron式の解説など、開発でよく使う小さなツールを集めた無料サイトです。登録不要で、処理はすべて端末内で完結します。"}},{"@type":"Question","name":"入力したコードやトークンは送信されますか？","acceptedAnswer":{"@type":"Answer","text":"いいえ。JWTや正規表現などの入力はすべてブラウザ内で処理され、サーバーに送信されません。機微な値も安心して扱えます。"}},{"@type":"Question","name":"無料ですか？","acceptedAnswer":{"@type":"Answer","text":"はい。すべて無料・登録不要です。運営のため広告を掲載する場合があります。"}}]}</script>
+<style>
+  :root{--bg:#f4f6fb;--card:#ffffff;--ink:#161a22;--ink-2:#586074;--muted:#949cae;--line:#e5e8f0;
+    --brand:#4f6ef7;--brand-d:#3f56d6;--accent:#0ea5b7;--good:#0ca678;--good-bg:#e6f6f1;
+    --shadow:0 1px 2px rgba(20,25,45,.05),0 8px 22px rgba(20,25,45,.07);}
+  @media (prefers-color-scheme:dark){:root{--bg:#0d1017;--card:#161b26;--ink:#eef1f8;--ink-2:#a6afc2;--muted:#727c93;
+    --line:#242b3a;--brand:#7c93ff;--brand-d:#a6b6ff;--accent:#22d3ee;--good:#3fce97;--good-bg:#0f2a24;
+    --shadow:0 1px 2px rgba(0,0,0,.35),0 10px 26px rgba(0,0,0,.5);}}
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--ink);line-height:1.85;font-family:system-ui,-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;-webkit-font-smoothing:antialiased;}
+  a{color:var(--brand);}
+  .sitebar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 16px;background:var(--card);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:10;}
+  .sb-brand{display:flex;align-items:center;gap:9px;font-weight:800;text-decoration:none;color:var(--ink);font-size:16px;}
+  .sb-logo{width:30px;height:30px;border-radius:10px;background:linear-gradient(135deg,var(--brand),var(--accent));display:grid;place-items:center;color:#fff;font-size:16px;}
+  .sb-links{display:flex;gap:13px;font-size:14px;font-weight:700;} .sb-links a{text-decoration:none;color:var(--ink-2);} .sb-links a:hover{color:var(--brand);}
+  .wrap{max-width:880px;margin:0 auto;padding:24px 18px 70px;}
+  .hero{text-align:center;padding:22px 10px 6px;}
+  .hero h1{font-size:29px;margin:6px 0 12px;line-height:1.32;}
+  .hero p{font-size:15.5px;color:var(--ink-2);max-width:620px;margin:0 auto;}
+  .chips{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:18px 0 6px;}
+  .chip{font-size:12.5px;font-weight:800;color:var(--brand);background:#e8ecfd;padding:6px 13px;border-radius:20px;}
+  @media (prefers-color-scheme:dark){.chip{background:#1c2440;}}
+  h2{font-size:21px;margin:40px 0 6px;} .lead2{color:var(--ink-2);font-size:14px;margin:0 0 14px;}
+  .tools{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;} @media(max-width:720px){.tools{grid-template-columns:1fr 1fr;}} @media(max-width:460px){.tools{grid-template-columns:1fr;}}
+  .tool{display:block;text-decoration:none;color:inherit;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:var(--shadow);transition:.15s;}
+  .tool:hover{transform:translateY(-2px);border-color:var(--brand);}
+  .tool .ic{width:50px;height:50px;border-radius:14px;display:grid;place-items:center;font-size:25px;background:var(--bg);}
+  .tool h3{margin:12px 0 4px;font-size:17px;} .tool p{margin:0;font-size:13px;color:var(--ink-2);}
+  .tool .go{margin-top:10px;font-size:13px;font-weight:800;color:var(--brand);}
+  .use{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:6px;} @media(max-width:720px){.use{grid-template-columns:1fr;}}
+  .use .u{background:var(--card);border:1px solid var(--line);border-radius:15px;padding:16px;} .use .u b{display:block;margin-bottom:5px;} .use .u p{margin:0;font-size:13.5px;color:var(--ink-2);}
+  .faq{background:var(--card);border:1px solid var(--line);border-radius:15px;padding:6px 18px;}
+  .faq details{border-bottom:1px solid var(--line);padding:13px 0;} .faq details:last-child{border-bottom:none;}
+  .faq summary{font-weight:800;cursor:pointer;font-size:15px;} .faq p{font-size:13.5px;color:var(--ink-2);margin:8px 0 0;}
+  .crumb{font-size:12.5px;color:var(--muted);margin:2px 0 14px;} .crumb a{color:var(--ink-2);text-decoration:none;}
+  .page-h1{font-size:26px;margin:4px 0 6px;} .lead{font-size:15px;color:var(--ink-2);margin:0 0 20px;}
+  .cardp{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 24px;box-shadow:var(--shadow);}
+  .prose h2{font-size:19px;margin:28px 0 10px;padding-bottom:6px;border-bottom:2px solid var(--line);} .prose h2:first-child{margin-top:4px;}
+  .prose p{margin:8px 0;font-size:14.5px;} .prose ul{margin:8px 0;padding-left:22px;} .prose li{margin:6px 0;font-size:14.5px;}
+  .prose dt{font-weight:800;font-size:14px;margin-top:12px;} .prose dd{margin:2px 0 0;font-size:14.5px;color:var(--ink-2);}
+  .cta{display:inline-block;text-decoration:none;font-weight:800;font-size:15px;padding:12px 22px;border-radius:13px;background:var(--brand);color:#fff;margin-top:8px;}
+  footer{margin-top:46px;padding-top:18px;border-top:1px solid var(--line);font-size:13px;color:var(--muted);text-align:center;line-height:2;}
+  footer a{color:var(--ink-2);text-decoration:none;margin:0 7px;}
+</style></head><body>
+<nav class="sitebar"><a class="sb-brand" href="index.html"><span class="sb-logo">🛠️</span>こでっと</a><div class="sb-links"><a href="index.html">ツール一覧</a><a href="about.html">このサイトについて</a></div></nav>
+<div class="wrap">
+  <section class="hero">
+    <h1>開発の“ちょっと”を、その場で。</h1>
+    <p>正規表現・進数・Unix時間・カラー・JWT・cron——開発でよく使う小さなツールをまとめました。<strong>入力はすべて端末内で処理</strong>、トークンやコードを送信しません。登録不要、すぐ使えます。</p>
+    <div class="chips"><span class="chip">⚡ 登録不要・無料</span><span class="chip">🔒 送信しない（端末内）</span><span class="chip">📱 スマホでも使える</span></div>
+  </section>
+  <h2>ツール</h2>
+  <p class="lead2">入力するとその場で処理します。スマホ・タブレット・PC対応。</p>
+  <div class="tools">
+    <a class="tool" href="tool-regex.html"><div class="ic">⚡</div><h3>正規表現テスト</h3><p>パターンとテキストからマッチをリアルタイムでハイライト。</p><div class="go">使ってみる →</div></a>
+    <a class="tool" href="tool-radix.html"><div class="ic">🔢</div><h3>進数変換</h3><p>2進・8進・10進・16進をまとめて相互変換。</p><div class="go">使ってみる →</div></a>
+    <a class="tool" href="tool-unixtime.html"><div class="ic">⏱️</div><h3>Unix時間変換</h3><p>epoch⇄日時。秒/ミリ秒を自動判別、UTC/ISOも表示。</p><div class="go">使ってみる →</div></a>
+    <a class="tool" href="tool-color.html"><div class="ic">🎨</div><h3>カラーコード変換</h3><p>HEX/RGB/HSLを相互変換、色をプレビュー。</p><div class="go">使ってみる →</div></a>
+    <a class="tool" href="tool-jwt.html"><div class="ic">🔑</div><h3>JWTデコード</h3><p>ヘッダー/ペイロードを整形表示。送信せず端末内で。</p><div class="go">使ってみる →</div></a>
+    <a class="tool" href="tool-cron.html"><div class="ic">🗓️</div><h3>cron式の解説</h3><p>cron式の意味を日本語で解説。crontab確認に。</p><div class="go">使ってみる →</div></a>
+  </div>
+  <h2>こでっとの特長</h2>
+  <div class="use">
+    <div class="u"><b>送信しないから安心</b><p>JWTや正規表現など、機微な値もすべて端末内で処理。外部に送りません。</p></div>
+    <div class="u"><b>すぐ使える</b><p>ログイン不要。ページを開いて入力すれば、その場で結果が出ます。</p></div>
+    <div class="u"><b>スマホでも</b><p>移動中やレビュー中にサッと確認。PWA対応でホーム画面にも追加できます。</p></div>
+  </div>
+  <h2>よくある質問</h2>
+  <div class="faq">
+    <details open><summary>こでっとはどんなサイトですか？</summary><p>正規表現テスト・進数変換・Unix時間変換・カラーコード変換・JWTデコード・cron式の解説など、開発でよく使う小さなツールを集めた無料サイトです。登録不要で、処理はすべて端末内で完結します。</p></details>
+    <details><summary>入力したコードやトークンは送信されますか？</summary><p>いいえ。JWTや正規表現などの入力はすべてブラウザ内で処理され、サーバーに送信されません。機微な値も安心して扱えます。</p></details>
+    <details><summary>無料ですか？登録は必要ですか？</summary><p>すべて無料・登録不要です。運営のため広告を掲載する場合があります。</p></details>
+    <details><summary>スマホでも使えますか？</summary><p>使えます。ホーム画面に追加すればアプリのように起動できます（PWA対応）。</p></details>
+  </div>
+  <footer><div><a href="index.html">ツール一覧</a>・<a href="about.html">このサイトについて</a>・<a href="privacy.html">プライバシー</a>・<a href="terms.html">利用規約</a></div><div>こでっと ・ すべての処理は端末内で完結します</div></footer>
+</div></body></html>
