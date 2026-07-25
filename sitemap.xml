@@ -43,6 +43,18 @@
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://kodetto.kawatare.studio/article-regex-learning.html</loc>
+    <lastmod>2026-07-25</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://kodetto.kawatare.studio/article-cron-server.html</loc>
+    <lastmod>2026-07-25</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://kodetto.kawatare.studio/about.html</loc>
     <lastmod>2026-07-20</lastmod>
     <changefreq>yearly</changefreq>

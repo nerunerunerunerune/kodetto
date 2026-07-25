@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ja"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>cron式が読めると何ができる？サーバー運用の基本｜こでっと</title>
+<meta name="description" content="cron式の読み方から、定期実行を使ったサーバー運用の基本、個人開発やちょっとした自動化でレンタルサーバー・VPSを選ぶときの考え方まで解説。">
+<link rel="canonical" href="https://kodetto.kawatare.studio/article-cron-server.html"><meta name="theme-color" content="#4f6ef7">
+<link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="manifest" href="site.webmanifest">
+<meta property="og:type" content="article"><meta property="og:site_name" content="こでっと">
+<meta property="og:title" content="cron式が読めると何ができる？サーバー運用の基本"><meta property="og:description" content="cron式の読み方から、定期実行を使ったサーバー運用の基本、レンタルサーバー・VPSを選ぶときの考え方まで解説。">
+<meta property="og:url" content="https://kodetto.kawatare.studio/article-cron-server.html"><meta property="og:image" content="https://kodetto.kawatare.studio/ogp.png">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="cron式が読めると何ができる？サーバー運用の基本"><meta name="twitter:description" content="cron式の読み方から、定期実行を使ったサーバー運用の基本まで解説。"><meta name="twitter:image" content="https://kodetto.kawatare.studio/ogp.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"cron式が読めると何ができる？サーバー運用の基本","author":{"@type":"Organization","name":"かわたれ studio"},"publisher":{"@type":"Organization","name":"かわたれ studio"},"datePublished":"2026-07-25","dateModified":"2026-07-25","description":"cron式の読み方から、定期実行を使ったサーバー運用の基本、レンタルサーバー・VPSを選ぶときの考え方まで解説。"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"cron式の5つのフィールドは何を表しますか？","acceptedAnswer":{"@type":"Answer","text":"左から「分（0-59）」「時（0-23）」「日（1-31）」「月（1-12）」「曜日（0-7、0と7は日曜）」の順です。例えば「0 3 * * *」は毎日3時0分に実行、という意味になります。"}},{"@type":"Question","name":"個人開発ならレンタルサーバーとVPS、どちらを選ぶべきですか？","acceptedAnswer":{"@type":"Answer","text":"管理画面から手軽にcronやメール、DBを使いたいならレンタルサーバー、root権限で自由に環境構築したい・Dockerを使いたいといった場合はVPSが向いています。最初の一台なら、まずはレンタルサーバーで試して、必要になったらVPSに移行する流れでも十分です。"}},{"@type":"Question","name":"cron式はどこで確認できますか？","acceptedAnswer":{"@type":"Answer","text":"こでっとの「cron式の解説」ツールにcron式を入力すると、意味を日本語でその場で確認できます。設定ミスの確認や、他の人が書いたcrontabの読み解きにも使えます。"}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"こでっと","item":"https://kodetto.kawatare.studio/"},{"@type":"ListItem","position":2,"name":"cron式が読めると何ができる？","item":"https://kodetto.kawatare.studio/article-cron-server.html"}]}</script>
+<style>
+  :root{--bg:#f4f6fb;--card:#ffffff;--ink:#161a22;--ink-2:#586074;--muted:#949cae;--line:#e5e8f0;
+    --brand:#4f6ef7;--brand-d:#3f56d6;--accent:#0ea5b7;--good:#0ca678;--good-bg:#e6f6f1;
+    --shadow:0 1px 2px rgba(20,25,45,.05),0 8px 22px rgba(20,25,45,.07);}
+  @media (prefers-color-scheme:dark){:root{--bg:#0d1017;--card:#161b26;--ink:#eef1f8;--ink-2:#a6afc2;--muted:#727c93;
+    --line:#242b3a;--brand:#7c93ff;--brand-d:#a6b6ff;--accent:#22d3ee;--good:#3fce97;--good-bg:#0f2a24;
+    --shadow:0 1px 2px rgba(0,0,0,.35),0 10px 26px rgba(0,0,0,.5);}}
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--ink);line-height:1.85;font-family:system-ui,-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;-webkit-font-smoothing:antialiased;}
+  a{color:var(--brand);}
+  .sitebar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 16px;background:var(--card);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:10;}
+  .sb-brand{display:flex;align-items:center;gap:9px;font-weight:800;text-decoration:none;color:var(--ink);font-size:16px;}
+  .sb-logo{width:30px;height:30px;border-radius:10px;background:linear-gradient(135deg,var(--brand),var(--accent));display:grid;place-items:center;color:#fff;font-size:16px;}
+  .sb-links{display:flex;gap:13px;font-size:14px;font-weight:700;} .sb-links a{text-decoration:none;color:var(--ink-2);} .sb-links a:hover{color:var(--brand);}
+  .wrap{max-width:780px;margin:0 auto;padding:24px 18px 70px;}
+  .crumb{font-size:12.5px;color:var(--muted);margin:2px 0 14px;} .crumb a{color:var(--ink-2);text-decoration:none;}
+  .page-h1{font-size:25px;margin:4px 0 6px;line-height:1.4;} .lead{font-size:15px;color:var(--ink-2);margin:0 0 20px;}
+  .cardp{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 24px;box-shadow:var(--shadow);}
+  .prose h2{font-size:19px;margin:28px 0 10px;padding-bottom:6px;border-bottom:2px solid var(--line);} .prose h2:first-child{margin-top:4px;}
+  .prose p{margin:8px 0;font-size:14.5px;} .prose ul{margin:8px 0;padding-left:22px;} .prose li{margin:6px 0;font-size:14.5px;}
+  .prose table{width:100%;border-collapse:collapse;margin:10px 0;font-size:13.5px;} .prose td,.prose th{border:1px solid var(--line);padding:7px 10px;text-align:left;}
+  .cta{display:inline-block;text-decoration:none;font-weight:800;font-size:15px;padding:12px 22px;border-radius:13px;background:var(--brand);color:#fff;margin-top:8px;}
+  .pr{background:var(--good-bg);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin:16px 0;}
+  .pr .tag{display:inline-block;font-size:11px;font-weight:800;color:#fff;background:var(--ink-2);padding:2px 8px;border-radius:5px;margin-bottom:8px;}
+  .pr a{font-weight:800;}
+  .rel-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px;} @media(max-width:600px){.rel-grid{grid-template-columns:1fr;}}
+  .rel{display:block;text-decoration:none;color:inherit;background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:14px;font-weight:800;} .rel:hover{border-color:var(--brand);}
+  .rel span{display:block;font-size:12px;color:var(--ink-2);font-weight:500;margin-top:2px;}
+  footer{margin-top:46px;padding-top:18px;border-top:1px solid var(--line);font-size:13px;color:var(--muted);text-align:center;line-height:2;}
+  footer a{color:var(--ink-2);text-decoration:none;margin:0 7px;}
+</style><script async src="https://www.googletagmanager.com/gtag/js?id=G-H0X1P2BBWH"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-H0X1P2BBWH');</script>
+</head><body>
+<nav class="sitebar"><a class="sb-brand" href="index.html"><span class="sb-logo">🛠️</span>こでっと</a><div class="sb-links"><a href="index.html">ツール一覧</a><a href="about.html">このサイトについて</a></div></nav>
+<div class="wrap">
+  <div class="crumb"><a href="index.html">ホーム</a> ／ cron式が読めると何ができる？</div>
+  <h1 class="page-h1">cron式が読めると何ができる？サーバー運用の基本</h1>
+  <p class="lead">「バックアップを毎晩自動で」「毎朝レポートをメール送信」——定期実行の仕組みを理解すると、できることが一気に広がります。</p>
+  <div class="cardp prose">
+
+  <h2>cron式は5つの数字（記号）の組み合わせ</h2>
+  <p>cronはLinux系サーバーで定番の「定期実行」の仕組みです。書式は次の5つのフィールドで構成されます。</p>
+  <table><tr><th>分</th><th>時</th><th>日</th><th>月</th><th>曜日</th></tr><tr><td>0-59</td><td>0-23</td><td>1-31</td><td>1-12</td><td>0-7（日曜=0/7）</td></tr></table>
+  <p>例えば <code>0 3 * * *</code> は「毎日 3:00 に実行」、<code>*/15 * * * *</code> は「15分ごとに実行」という意味です。<code>*</code> は「毎回」を表します。</p>
+
+  <h2>実務でよくある使いどころ</h2>
+  <ul>
+    <li><b>バックアップの自動化</b>：深夜にDBやファイルを自動でバックアップ。</li>
+    <li><b>定期レポート</b>：毎朝、前日のアクセス数や売上を集計してメール送信。</li>
+    <li><b>キャッシュのクリア・再生成</b>：一定時間ごとにキャッシュを最新化。</li>
+    <li><b>外部APIの定期取得</b>：為替レートや在庫情報などを定期的に取得して更新。</li>
+  </ul>
+  <p>自分やチームが書いたcron式が正しいか不安なときは、<a href="tool-cron.html">こでっとのcron式の解説</a>に貼り付ければ、意味を日本語でその場で確認できます。設定ミスによる「動くはずが動いていなかった」を防げます。</p>
+
+  <h2>個人開発でサーバーを選ぶときの考え方</h2>
+  <p>定期実行を含めて自分のサービスを24時間動かし続けるには、どこかにサーバーを置く必要があります。個人開発・小規模運用でよく比較されるのは次の2タイプです。</p>
+  <ul>
+    <li><b>レンタルサーバー</b>：管理画面からcronやメール、データベースを設定でき、初期設定の手間が少ないタイプ。まずサーバーに慣れたい人向け。</li>
+    <li><b>VPS（仮想専用サーバー）</b>：root権限があり、Docker等も自由に使える分、自分でOSやセキュリティも管理する必要があるタイプ。構成の自由度を優先したい人向け。</li>
+  </ul>
+
+  <div class="pr">
+    <span class="tag">PR</span>
+    <p style="margin:0 0 6px">個人開発・自動化の置き場所を探している方向けのサーバー例です。料金・スペックは公式サイトでご確認ください。</p>
+    <!-- AFFILIATE SLOT: A8.net registration後、下記リンクをアフィリエイトタグ付きURLに置き換えること -->
+    <p style="margin:6px 0 0"><a href="https://www.xserver.ne.jp/" target="_blank" rel="noopener sponsored">エックスサーバー（公式サイト）</a> ・ <a href="https://www.conoha.jp/vps/" target="_blank" rel="noopener sponsored">ConoHa VPS（公式サイト）</a></p>
+  </div>
+
+  <h2>関連ツール</h2>
+  <div class="rel-grid">
+    <a class="rel" href="tool-cron.html">🗓️ cron式の解説 <span>意味を日本語で確認</span></a>
+    <a class="rel" href="tool-unixtime.html">⏱️ Unix時間変換 <span>epoch⇄日時</span></a>
+  </div>
+
+  <div class="btnrow"><a class="cta" href="index.html">ツール一覧を見る</a></div>
+  </div>
+  <footer><div><a href="index.html">ツール一覧</a>・<a href="about.html">このサイトについて</a>・<a href="privacy.html">プライバシー</a>・<a href="terms.html">利用規約</a>・<a href="https://kawatare.studio/">かわたれ studio</a></div><div>こでっと ・ 最終更新：2026-07-25</div></footer>
+</div>
+</body></html>

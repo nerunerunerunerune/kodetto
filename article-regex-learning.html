@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ja"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>正規表現が読めると何が変わる？学び方のロードマップ｜こでっと</title>
+<meta name="description" content="正規表現を学ぶと実務の何が変わるのか、独学の進め方とつまずきやすいポイント、体系的に学びたいときの選択肢まで解説。こでっとの正規表現テストツールと合わせてどうぞ。">
+<link rel="canonical" href="https://kodetto.kawatare.studio/article-regex-learning.html"><meta name="theme-color" content="#4f6ef7">
+<link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="manifest" href="site.webmanifest">
+<meta property="og:type" content="article"><meta property="og:site_name" content="こでっと">
+<meta property="og:title" content="正規表現が読めると何が変わる？学び方のロードマップ"><meta property="og:description" content="正規表現を学ぶと実務の何が変わるのか、独学の進め方とつまずきやすいポイント、体系的に学びたいときの選択肢まで解説。">
+<meta property="og:url" content="https://kodetto.kawatare.studio/article-regex-learning.html"><meta property="og:image" content="https://kodetto.kawatare.studio/ogp.png">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="正規表現が読めると何が変わる？学び方のロードマップ"><meta name="twitter:description" content="正規表現を学ぶと実務の何が変わるのか、独学の進め方とつまずきやすいポイントを解説。"><meta name="twitter:image" content="https://kodetto.kawatare.studio/ogp.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"正規表現が読めると何が変わる？学び方のロードマップ","author":{"@type":"Organization","name":"かわたれ studio"},"publisher":{"@type":"Organization","name":"かわたれ studio"},"datePublished":"2026-07-25","dateModified":"2026-07-25","description":"正規表現を学ぶと実務の何が変わるのか、独学の進め方とつまずきやすいポイント、体系的に学びたいときの選択肢まで解説。"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"正規表現はどこから学べばいいですか？","acceptedAnswer":{"@type":"Answer","text":"まずは「文字クラス（\\d \\w \\s）」「量指定子（* + ? {n,m}）」「グループ（）」の3つだけ覚え、実際のテキストに当てながら覚えるのが近道です。こでっとの正規表現テストのようなツールで、書いたパターンがその場でハイライトされるのを見ながら試すと定着しやすくなります。"}},{"@type":"Question","name":"独学とスクール、どちらがいいですか？","acceptedAnswer":{"@type":"Answer","text":"正規表現そのものは独学でも十分身につきます。ただし「実務でどう設計に組み込むか」「バリデーションやログ解析の文脈でどう使うか」まで含めて体系的に学びたい場合は、プログラミングスクールでカリキュラムに沿って学ぶ方が遠回りを避けられます。"}},{"@type":"Question","name":"正規表現とJWTは関係がありますか？","acceptedAnswer":{"@type":"Answer","text":"直接の関係はありませんが、どちらも「文字列を構造的に扱う」実務スキルという点で共通します。フォーム入力のバリデーションに正規表現を、認証トークンの中身確認にJWTデコードを使う、といった形で併用する場面がよくあります。"}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"こでっと","item":"https://kodetto.kawatare.studio/"},{"@type":"ListItem","position":2,"name":"正規表現が読めると何が変わる？","item":"https://kodetto.kawatare.studio/article-regex-learning.html"}]}</script>
+<style>
+  :root{--bg:#f4f6fb;--card:#ffffff;--ink:#161a22;--ink-2:#586074;--muted:#949cae;--line:#e5e8f0;
+    --brand:#4f6ef7;--brand-d:#3f56d6;--accent:#0ea5b7;--good:#0ca678;--good-bg:#e6f6f1;
+    --shadow:0 1px 2px rgba(20,25,45,.05),0 8px 22px rgba(20,25,45,.07);}
+  @media (prefers-color-scheme:dark){:root{--bg:#0d1017;--card:#161b26;--ink:#eef1f8;--ink-2:#a6afc2;--muted:#727c93;
+    --line:#242b3a;--brand:#7c93ff;--brand-d:#a6b6ff;--accent:#22d3ee;--good:#3fce97;--good-bg:#0f2a24;
+    --shadow:0 1px 2px rgba(0,0,0,.35),0 10px 26px rgba(0,0,0,.5);}}
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--ink);line-height:1.85;font-family:system-ui,-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;-webkit-font-smoothing:antialiased;}
+  a{color:var(--brand);}
+  .sitebar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 16px;background:var(--card);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:10;}
+  .sb-brand{display:flex;align-items:center;gap:9px;font-weight:800;text-decoration:none;color:var(--ink);font-size:16px;}
+  .sb-logo{width:30px;height:30px;border-radius:10px;background:linear-gradient(135deg,var(--brand),var(--accent));display:grid;place-items:center;color:#fff;font-size:16px;}
+  .sb-links{display:flex;gap:13px;font-size:14px;font-weight:700;} .sb-links a{text-decoration:none;color:var(--ink-2);} .sb-links a:hover{color:var(--brand);}
+  .wrap{max-width:780px;margin:0 auto;padding:24px 18px 70px;}
+  .crumb{font-size:12.5px;color:var(--muted);margin:2px 0 14px;} .crumb a{color:var(--ink-2);text-decoration:none;}
+  .page-h1{font-size:25px;margin:4px 0 6px;line-height:1.4;} .lead{font-size:15px;color:var(--ink-2);margin:0 0 20px;}
+  .cardp{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 24px;box-shadow:var(--shadow);}
+  .prose h2{font-size:19px;margin:28px 0 10px;padding-bottom:6px;border-bottom:2px solid var(--line);} .prose h2:first-child{margin-top:4px;}
+  .prose p{margin:8px 0;font-size:14.5px;} .prose ul{margin:8px 0;padding-left:22px;} .prose li{margin:6px 0;font-size:14.5px;}
+  .cta{display:inline-block;text-decoration:none;font-weight:800;font-size:15px;padding:12px 22px;border-radius:13px;background:var(--brand);color:#fff;margin-top:8px;}
+  .pr{background:var(--good-bg);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin:16px 0;}
+  .pr .tag{display:inline-block;font-size:11px;font-weight:800;color:#fff;background:var(--ink-2);padding:2px 8px;border-radius:5px;margin-bottom:8px;}
+  .pr a{font-weight:800;}
+  .rel-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px;} @media(max-width:600px){.rel-grid{grid-template-columns:1fr;}}
+  .rel{display:block;text-decoration:none;color:inherit;background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:14px;font-weight:800;} .rel:hover{border-color:var(--brand);}
+  .rel span{display:block;font-size:12px;color:var(--ink-2);font-weight:500;margin-top:2px;}
+  footer{margin-top:46px;padding-top:18px;border-top:1px solid var(--line);font-size:13px;color:var(--muted);text-align:center;line-height:2;}
+  footer a{color:var(--ink-2);text-decoration:none;margin:0 7px;}
+</style><script async src="https://www.googletagmanager.com/gtag/js?id=G-H0X1P2BBWH"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-H0X1P2BBWH');</script>
+</head><body>
+<nav class="sitebar"><a class="sb-brand" href="index.html"><span class="sb-logo">🛠️</span>こでっと</a><div class="sb-links"><a href="index.html">ツール一覧</a><a href="about.html">このサイトについて</a></div></nav>
+<div class="wrap">
+  <div class="crumb"><a href="index.html">ホーム</a> ／ 正規表現が読めると何が変わる？</div>
+  <h1 class="page-h1">正規表現が読めると何が変わる？学び方のロードマップ</h1>
+  <p class="lead">「なんとなく動くけど理解していない」を卒業するための、実務目線の学び方まとめです。</p>
+  <div class="cardp prose">
+
+  <h2>正規表現でできることは、実は3種類しかない</h2>
+  <p>正規表現と聞くと難しそうに見えますが、実務でやっていることは大きく分けて「①文字列が条件に合っているか判定する（バリデーション）」「②文字列の中から欲しい部分だけ取り出す（抽出）」「③文字列の一部を別の文字列に置き換える（置換）」の3つだけです。電話番号の形式チェック、ログファイルからエラー行だけ抜き出す、CSVの表記ゆれを一括置換する——どれもこの3パターンの組み合わせでできています。</p>
+
+  <h2>独学でつまずきやすいポイント</h2>
+  <ul>
+    <li><b>貪欲マッチと非貪欲マッチ</b>：<code>.*</code> は「できるだけ長く」マッチしようとします。意図せず範囲が広がりすぎる場合は <code>.*?</code>（非貪欲）を試すと解決することが多いです。</li>
+    <li><b>エスケープ忘れ</b>：<code>.</code> や <code>(</code> など、正規表現で特別な意味を持つ記号をそのまま探したい場合は <code>\.</code> のようにエスケープが必要です。</li>
+    <li><b>言語・環境ごとの微妙な違い</b>：JavaScript・Python・PHPなどでフラグの書き方や対応構文が微妙に異なります。まずは自分が使う言語のエンジンで動作確認する癖をつけると事故が減ります。</li>
+  </ul>
+  <p>いずれも「実際に書いて、マッチ結果を目で確認する」のが一番の近道です。<a href="tool-regex.html">こでっとの正規表現テスト</a>なら、パターンを入力するとマッチ箇所がその場でハイライトされるので、上記のようなつまずきに気づきやすくなります。</p>
+
+  <h2>次のステップ：実務の文脈で使えるようにする</h2>
+  <p>正規表現の書き方そのものは数日〜数週間で慣れますが、「フォームのバリデーション設計」「ログ監視の仕組み」「API入力のサニタイズ」といった実務の文脈に組み込むには、周辺知識（HTTP、認証、サーバーの基礎など）もセットで理解しておくと応用が効きます。認証まわりを扱うなら、<a href="tool-jwt.html">JWTデコード</a>でトークンの中身を確認する作業も合わせて慣れておくと良いでしょう。</p>
+
+  <h2>体系的に学びたい場合の選択肢</h2>
+  <p>独学で十分な人も多い一方、「我流のクセがついた」「実務に近い課題で練習したい」という場合は、カリキュラムに沿って学べるプログラミングスクールを使うのも一つの手です。</p>
+
+  <div class="pr">
+    <span class="tag">PR</span>
+    <p style="margin:0 0 6px">実務に近い課題で正規表現やAPI設計まで学びたい方向けのスクール例です。リンク先で無料相談・カリキュラムを確認できます。</p>
+    <!-- AFFILIATE SLOT: A8.net registration後、下記リンクをアフィリエイトタグ付きURLに置き換えること -->
+    <p style="margin:6px 0 0"><a href="https://www.sejuku.net/" target="_blank" rel="noopener sponsored">侍エンジニア塾（公式サイト）</a> ・ <a href="https://techacademy.jp/" target="_blank" rel="noopener sponsored">TechAcademy（公式サイト）</a></p>
+  </div>
+
+  <h2>関連ツール</h2>
+  <div class="rel-grid">
+    <a class="rel" href="tool-regex.html">⚡ 正規表現テスト <span>パターンをその場でハイライト確認</span></a>
+    <a class="rel" href="tool-jwt.html">🔑 JWTデコード <span>ヘッダー/ペイロードを確認</span></a>
+  </div>
+
+  <div class="btnrow"><a class="cta" href="index.html">ツール一覧を見る</a></div>
+  </div>
+  <footer><div><a href="index.html">ツール一覧</a>・<a href="about.html">このサイトについて</a>・<a href="privacy.html">プライバシー</a>・<a href="terms.html">利用規約</a>・<a href="https://kawatare.studio/">かわたれ studio</a></div><div>こでっと ・ 最終更新：2026-07-25</div></footer>
+</div>
+</body></html>
