@@ -3,15 +3,15 @@
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>cron式が読めると何ができる？サーバー運用の基本｜こでっと</title>
 <meta name="description" content="cron式の読み方から、定期実行を使ったサーバー運用の基本、個人開発やちょっとした自動化でレンタルサーバー・VPSを選ぶときの考え方まで解説。">
-<link rel="canonical" href="https://kodetto.kawatare.studio/article-cron-server.html"><meta name="theme-color" content="#4f6ef7">
+<link rel="canonical" href="https://kodetto.kawatare.studio/article-cron-server"><meta name="theme-color" content="#4f6ef7">
 <link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="manifest" href="site.webmanifest"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="こでっと">
 <meta property="og:type" content="article"><meta property="og:site_name" content="こでっと">
 <meta property="og:title" content="cron式が読めると何ができる？サーバー運用の基本"><meta property="og:description" content="cron式の読み方から、定期実行を使ったサーバー運用の基本、レンタルサーバー・VPSを選ぶときの考え方まで解説。">
-<meta property="og:url" content="https://kodetto.kawatare.studio/article-cron-server.html"><meta property="og:image" content="https://kodetto.kawatare.studio/ogp.png">
+<meta property="og:url" content="https://kodetto.kawatare.studio/article-cron-server"><meta property="og:image" content="https://kodetto.kawatare.studio/ogp.png">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="cron式が読めると何ができる？サーバー運用の基本"><meta name="twitter:description" content="cron式の読み方から、定期実行を使ったサーバー運用の基本まで解説。"><meta name="twitter:image" content="https://kodetto.kawatare.studio/ogp.png">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"cron式が読めると何ができる？サーバー運用の基本","author":{"@type":"Organization","name":"かわたれ studio"},"publisher":{"@type":"Organization","name":"かわたれ studio"},"datePublished":"2026-07-25","dateModified":"2026-07-25","description":"cron式の読み方から、定期実行を使ったサーバー運用の基本、レンタルサーバー・VPSを選ぶときの考え方まで解説。"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"cron式の5つのフィールドは何を表しますか？","acceptedAnswer":{"@type":"Answer","text":"左から「分（0-59）」「時（0-23）」「日（1-31）」「月（1-12）」「曜日（0-7、0と7は日曜）」の順です。例えば「0 3 * * *」は毎日3時0分に実行、という意味になります。"}},{"@type":"Question","name":"個人開発ならレンタルサーバーとVPS、どちらを選ぶべきですか？","acceptedAnswer":{"@type":"Answer","text":"管理画面から手軽にcronやメール、DBを使いたいならレンタルサーバー、root権限で自由に環境構築したい・Dockerを使いたいといった場合はVPSが向いています。最初の一台なら、まずはレンタルサーバーで試して、必要になったらVPSに移行する流れでも十分です。"}},{"@type":"Question","name":"cron式はどこで確認できますか？","acceptedAnswer":{"@type":"Answer","text":"こでっとの「cron式の解説」ツールにcron式を入力すると、意味を日本語でその場で確認できます。設定ミスの確認や、他の人が書いたcrontabの読み解きにも使えます。"}}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"こでっと","item":"https://kodetto.kawatare.studio/"},{"@type":"ListItem","position":2,"name":"cron式が読めると何ができる？","item":"https://kodetto.kawatare.studio/article-cron-server.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"こでっと","item":"https://kodetto.kawatare.studio/"},{"@type":"ListItem","position":2,"name":"cron式が読めると何ができる？","item":"https://kodetto.kawatare.studio/article-cron-server"}]}</script>
 <style>
   :root{--bg:#f4f6fb;--card:#ffffff;--ink:#161a22;--ink-2:#586074;--muted:#949cae;--line:#e5e8f0;
     --brand:#4f6ef7;--brand-d:#3f56d6;--accent:#0ea5b7;--good:#0ca678;--good-bg:#e6f6f1;
@@ -45,9 +45,9 @@
 </style><script async src="https://www.googletagmanager.com/gtag/js?id=G-H0X1P2BBWH"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-H0X1P2BBWH');</script>
 </head><body>
-<nav class="sitebar"><a class="sb-brand" href="index.html"><span class="sb-logo">🛠️</span>こでっと</a><div class="sb-links"><a href="index.html">ツール一覧</a><a href="about.html">このサイトについて</a></div></nav>
+<nav class="sitebar"><a class="sb-brand" href="/"><span class="sb-logo">🛠️</span>こでっと</a><div class="sb-links"><a href="/">ツール一覧</a><a href="about">このサイトについて</a></div></nav>
 <div class="wrap">
-  <div class="crumb"><a href="index.html">ホーム</a> ／ cron式が読めると何ができる？</div>
+  <div class="crumb"><a href="/">ホーム</a> ／ cron式が読めると何ができる？</div>
   <h1 class="page-h1">cron式が読めると何ができる？サーバー運用の基本</h1>
   <p class="lead">「バックアップを毎晩自動で」「毎朝レポートをメール送信」——定期実行の仕組みを理解すると、できることが一気に広がります。</p>
   <div class="cardp prose">
@@ -64,7 +64,7 @@
     <li><b>キャッシュのクリア・再生成</b>：一定時間ごとにキャッシュを最新化。</li>
     <li><b>外部APIの定期取得</b>：為替レートや在庫情報などを定期的に取得して更新。</li>
   </ul>
-  <p>自分やチームが書いたcron式が正しいか不安なときは、<a href="tool-cron.html">こでっとのcron式の解説</a>に貼り付ければ、意味を日本語でその場で確認できます。設定ミスによる「動くはずが動いていなかった」を防げます。</p>
+  <p>自分やチームが書いたcron式が正しいか不安なときは、<a href="tool-cron">こでっとのcron式の解説</a>に貼り付ければ、意味を日本語でその場で確認できます。設定ミスによる「動くはずが動いていなかった」を防げます。</p>
 
   <h2>個人開発でサーバーを選ぶときの考え方</h2>
   <p>定期実行を含めて自分のサービスを24時間動かし続けるには、どこかにサーバーを置く必要があります。個人開発・小規模運用でよく比較されるのは次の2タイプです。</p>
@@ -82,13 +82,13 @@
 
   <h2>関連ツール</h2>
   <div class="rel-grid">
-    <a class="rel" href="tool-cron.html">🗓️ cron式の解説 <span>意味を日本語で確認</span></a>
-    <a class="rel" href="tool-unixtime.html">⏱️ Unix時間変換 <span>epoch⇄日時</span></a>
+    <a class="rel" href="tool-cron">🗓️ cron式の解説 <span>意味を日本語で確認</span></a>
+    <a class="rel" href="tool-unixtime">⏱️ Unix時間変換 <span>epoch⇄日時</span></a>
   </div>
 
-  <div class="btnrow"><a class="cta" href="index.html">ツール一覧を見る</a></div>
+  <div class="btnrow"><a class="cta" href="/">ツール一覧を見る</a></div>
   </div>
-  <footer><div><a href="index.html">ツール一覧</a>・<a href="about.html">このサイトについて</a>・<a href="privacy.html">プライバシー</a>・<a href="terms.html">利用規約</a>・<a href="https://kawatare.studio/">かわたれ studio</a></div><div>こでっと ・ 最終更新：2026-07-25</div></footer>
+  <footer><div><a href="/">ツール一覧</a>・<a href="about">このサイトについて</a>・<a href="privacy">プライバシー</a>・<a href="terms">利用規約</a>・<a href="https://kawatare.studio/">かわたれ studio</a></div><div>こでっと ・ 最終更新：2026-07-25</div></footer>
 </div>
 <!-- pwa:start -->
 <script>

@@ -56,7 +56,7 @@
     {
       "name": "正規表現テスト",
       "short_name": "正規表現テスト",
-      "url": "/tool-regex.html",
+      "url": "/tool-regex",
       "icons": [
         {
           "src": "/icon-192.png",
@@ -68,7 +68,7 @@
     {
       "name": "進数変換",
       "short_name": "進数変換",
-      "url": "/tool-radix.html",
+      "url": "/tool-radix",
       "icons": [
         {
           "src": "/icon-192.png",
@@ -80,7 +80,7 @@
     {
       "name": "Unix時間変換",
       "short_name": "Unix時間変換",
-      "url": "/tool-unixtime.html",
+      "url": "/tool-unixtime",
       "icons": [
         {
           "src": "/icon-192.png",
@@ -92,7 +92,7 @@
     {
       "name": "カラーコード変換",
       "short_name": "カラーコード変換",
-      "url": "/tool-color.html",
+      "url": "/tool-color",
       "icons": [
         {
           "src": "/icon-192.png",

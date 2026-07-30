@@ -3,15 +3,15 @@
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>正規表現が読めると何が変わる？学び方のロードマップ｜こでっと</title>
 <meta name="description" content="正規表現を学ぶと実務の何が変わるのか、独学の進め方とつまずきやすいポイント、体系的に学びたいときの選択肢まで解説。こでっとの正規表現テストツールと合わせてどうぞ。">
-<link rel="canonical" href="https://kodetto.kawatare.studio/article-regex-learning.html"><meta name="theme-color" content="#4f6ef7">
+<link rel="canonical" href="https://kodetto.kawatare.studio/article-regex-learning"><meta name="theme-color" content="#4f6ef7">
 <link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="manifest" href="site.webmanifest"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="こでっと">
 <meta property="og:type" content="article"><meta property="og:site_name" content="こでっと">
 <meta property="og:title" content="正規表現が読めると何が変わる？学び方のロードマップ"><meta property="og:description" content="正規表現を学ぶと実務の何が変わるのか、独学の進め方とつまずきやすいポイント、体系的に学びたいときの選択肢まで解説。">
-<meta property="og:url" content="https://kodetto.kawatare.studio/article-regex-learning.html"><meta property="og:image" content="https://kodetto.kawatare.studio/ogp.png">
+<meta property="og:url" content="https://kodetto.kawatare.studio/article-regex-learning"><meta property="og:image" content="https://kodetto.kawatare.studio/ogp.png">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="正規表現が読めると何が変わる？学び方のロードマップ"><meta name="twitter:description" content="正規表現を学ぶと実務の何が変わるのか、独学の進め方とつまずきやすいポイントを解説。"><meta name="twitter:image" content="https://kodetto.kawatare.studio/ogp.png">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"正規表現が読めると何が変わる？学び方のロードマップ","author":{"@type":"Organization","name":"かわたれ studio"},"publisher":{"@type":"Organization","name":"かわたれ studio"},"datePublished":"2026-07-25","dateModified":"2026-07-25","description":"正規表現を学ぶと実務の何が変わるのか、独学の進め方とつまずきやすいポイント、体系的に学びたいときの選択肢まで解説。"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"正規表現はどこから学べばいいですか？","acceptedAnswer":{"@type":"Answer","text":"まずは「文字クラス（\\d \\w \\s）」「量指定子（* + ? {n,m}）」「グループ（）」の3つだけ覚え、実際のテキストに当てながら覚えるのが近道です。こでっとの正規表現テストのようなツールで、書いたパターンがその場でハイライトされるのを見ながら試すと定着しやすくなります。"}},{"@type":"Question","name":"独学とスクール、どちらがいいですか？","acceptedAnswer":{"@type":"Answer","text":"正規表現そのものは独学でも十分身につきます。ただし「実務でどう設計に組み込むか」「バリデーションやログ解析の文脈でどう使うか」まで含めて体系的に学びたい場合は、プログラミングスクールでカリキュラムに沿って学ぶ方が遠回りを避けられます。"}},{"@type":"Question","name":"正規表現とJWTは関係がありますか？","acceptedAnswer":{"@type":"Answer","text":"直接の関係はありませんが、どちらも「文字列を構造的に扱う」実務スキルという点で共通します。フォーム入力のバリデーションに正規表現を、認証トークンの中身確認にJWTデコードを使う、といった形で併用する場面がよくあります。"}}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"こでっと","item":"https://kodetto.kawatare.studio/"},{"@type":"ListItem","position":2,"name":"正規表現が読めると何が変わる？","item":"https://kodetto.kawatare.studio/article-regex-learning.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"こでっと","item":"https://kodetto.kawatare.studio/"},{"@type":"ListItem","position":2,"name":"正規表現が読めると何が変わる？","item":"https://kodetto.kawatare.studio/article-regex-learning"}]}</script>
 <style>
   :root{--bg:#f4f6fb;--card:#ffffff;--ink:#161a22;--ink-2:#586074;--muted:#949cae;--line:#e5e8f0;
     --brand:#4f6ef7;--brand-d:#3f56d6;--accent:#0ea5b7;--good:#0ca678;--good-bg:#e6f6f1;
@@ -44,9 +44,9 @@
 </style><script async src="https://www.googletagmanager.com/gtag/js?id=G-H0X1P2BBWH"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-H0X1P2BBWH');</script>
 </head><body>
-<nav class="sitebar"><a class="sb-brand" href="index.html"><span class="sb-logo">🛠️</span>こでっと</a><div class="sb-links"><a href="index.html">ツール一覧</a><a href="about.html">このサイトについて</a></div></nav>
+<nav class="sitebar"><a class="sb-brand" href="/"><span class="sb-logo">🛠️</span>こでっと</a><div class="sb-links"><a href="/">ツール一覧</a><a href="about">このサイトについて</a></div></nav>
 <div class="wrap">
-  <div class="crumb"><a href="index.html">ホーム</a> ／ 正規表現が読めると何が変わる？</div>
+  <div class="crumb"><a href="/">ホーム</a> ／ 正規表現が読めると何が変わる？</div>
   <h1 class="page-h1">正規表現が読めると何が変わる？学び方のロードマップ</h1>
   <p class="lead">「なんとなく動くけど理解していない」を卒業するための、実務目線の学び方まとめです。</p>
   <div class="cardp prose">
@@ -60,10 +60,10 @@
     <li><b>エスケープ忘れ</b>：<code>.</code> や <code>(</code> など、正規表現で特別な意味を持つ記号をそのまま探したい場合は <code>\.</code> のようにエスケープが必要です。</li>
     <li><b>言語・環境ごとの微妙な違い</b>：JavaScript・Python・PHPなどでフラグの書き方や対応構文が微妙に異なります。まずは自分が使う言語のエンジンで動作確認する癖をつけると事故が減ります。</li>
   </ul>
-  <p>いずれも「実際に書いて、マッチ結果を目で確認する」のが一番の近道です。<a href="tool-regex.html">こでっとの正規表現テスト</a>なら、パターンを入力するとマッチ箇所がその場でハイライトされるので、上記のようなつまずきに気づきやすくなります。</p>
+  <p>いずれも「実際に書いて、マッチ結果を目で確認する」のが一番の近道です。<a href="tool-regex">こでっとの正規表現テスト</a>なら、パターンを入力するとマッチ箇所がその場でハイライトされるので、上記のようなつまずきに気づきやすくなります。</p>
 
   <h2>次のステップ：実務の文脈で使えるようにする</h2>
-  <p>正規表現の書き方そのものは数日〜数週間で慣れますが、「フォームのバリデーション設計」「ログ監視の仕組み」「API入力のサニタイズ」といった実務の文脈に組み込むには、周辺知識（HTTP、認証、サーバーの基礎など）もセットで理解しておくと応用が効きます。認証まわりを扱うなら、<a href="tool-jwt.html">JWTデコード</a>でトークンの中身を確認する作業も合わせて慣れておくと良いでしょう。</p>
+  <p>正規表現の書き方そのものは数日〜数週間で慣れますが、「フォームのバリデーション設計」「ログ監視の仕組み」「API入力のサニタイズ」といった実務の文脈に組み込むには、周辺知識（HTTP、認証、サーバーの基礎など）もセットで理解しておくと応用が効きます。認証まわりを扱うなら、<a href="tool-jwt">JWTデコード</a>でトークンの中身を確認する作業も合わせて慣れておくと良いでしょう。</p>
 
   <h2>体系的に学びたい場合の選択肢</h2>
   <p>独学で十分な人も多い一方、「我流のクセがついた」「実務に近い課題で練習したい」という場合は、カリキュラムに沿って学べるプログラミングスクールを使うのも一つの手です。</p>
@@ -77,13 +77,13 @@
 
   <h2>関連ツール</h2>
   <div class="rel-grid">
-    <a class="rel" href="tool-regex.html">⚡ 正規表現テスト <span>パターンをその場でハイライト確認</span></a>
-    <a class="rel" href="tool-jwt.html">🔑 JWTデコード <span>ヘッダー/ペイロードを確認</span></a>
+    <a class="rel" href="tool-regex">⚡ 正規表現テスト <span>パターンをその場でハイライト確認</span></a>
+    <a class="rel" href="tool-jwt">🔑 JWTデコード <span>ヘッダー/ペイロードを確認</span></a>
   </div>
 
-  <div class="btnrow"><a class="cta" href="index.html">ツール一覧を見る</a></div>
+  <div class="btnrow"><a class="cta" href="/">ツール一覧を見る</a></div>
   </div>
-  <footer><div><a href="index.html">ツール一覧</a>・<a href="about.html">このサイトについて</a>・<a href="privacy.html">プライバシー</a>・<a href="terms.html">利用規約</a>・<a href="https://kawatare.studio/">かわたれ studio</a></div><div>こでっと ・ 最終更新：2026-07-25</div></footer>
+  <footer><div><a href="/">ツール一覧</a>・<a href="about">このサイトについて</a>・<a href="privacy">プライバシー</a>・<a href="terms">利用規約</a>・<a href="https://kawatare.studio/">かわたれ studio</a></div><div>こでっと ・ 最終更新：2026-07-25</div></footer>
 </div>
 <!-- pwa:start -->
 <script>

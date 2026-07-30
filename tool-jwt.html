@@ -3,16 +3,16 @@
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>JWTデコード ― ヘッダー・ペイロードを表示｜こでっと</title>
 <meta name="description" content="JWT（JSON Web Token）を貼り付けると、ヘッダーとペイロードをBase64URLデコードして整形表示する無料ツール。exp/iatも読みやすく表示。署名検証はしません。ブラウザ内処理・登録不要。">
-<link rel="canonical" href="https://kodetto.kawatare.studio/tool-jwt.html"><meta name="theme-color" content="#4f6ef7">
+<link rel="canonical" href="https://kodetto.kawatare.studio/tool-jwt"><meta name="theme-color" content="#4f6ef7">
 <link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="manifest" href="site.webmanifest"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="こでっと">
 <meta property="og:type" content="website"><meta property="og:site_name" content="こでっと">
 <meta property="og:title" content="JWTデコード｜ヘッダー・ペイロードを表示"><meta property="og:description" content="JWT（JSON Web Token）を貼り付けると、ヘッダーとペイロードをBase64URLデコードして整形表示する無料ツール。exp/iatも読みやすく表示。署名検証はしません。ブラウザ内処理・登録不要。">
-<meta property="og:url" content="https://kodetto.kawatare.studio/tool-jwt.html"><meta property="og:image" content="https://kodetto.kawatare.studio/ogp.png">
+<meta property="og:url" content="https://kodetto.kawatare.studio/tool-jwt"><meta property="og:image" content="https://kodetto.kawatare.studio/ogp.png">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="JWTデコード｜ヘッダー・ペイロードを表示"><meta name="twitter:description" content="JWT（JSON Web Token）を貼り付けると、ヘッダーとペイロードをBase64URLデコードして整形表示する無料ツール。exp/iatも読みやすく表示。署名検証はしません。ブラウザ内処理・登録不要。"><meta name="twitter:image" content="https://kodetto.kawatare.studio/ogp.png">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"JWTデコード｜こでっと","applicationCategory":"DeveloperApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"JPY"},"description":"JWT（JSON Web Token）を貼り付けると、ヘッダーとペイロードをBase64URLデコードして整形表示する無料ツール。exp/iatも読みやすく表示。署名検証はしません。ブラウザ内処理・登録不要。"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"JWTデコードの使い方","step":[{"@type":"HowToStep","name":"JWTを貼る","text":"header.payload.signature 形式のトークンを貼り付けます。"},{"@type":"HowToStep","name":"デコード","text":"ヘッダーとペイロードが整形表示されます。"},{"@type":"HowToStep","name":"確認","text":"exp/iat も日時で確認できます。"}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"署名は検証されますか？","acceptedAnswer":{"@type":"Answer","text":"いいえ。中身の確認用で、署名検証は行いません（秘密鍵を扱わないため安全です）。本番の検証はサーバー側で行ってください。"}},{"@type":"Question","name":"トークンは送信されますか？","acceptedAnswer":{"@type":"Answer","text":"いいえ。デコードはすべて端末内（ブラウザ）で行い、トークンは送信されません。"}},{"@type":"Question","name":"日本語を含むペイロードも読めますか？","acceptedAnswer":{"@type":"Answer","text":"はい。UTF-8としてデコードして表示します。"}}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"こでっと","item":"https://kodetto.kawatare.studio/"},{"@type":"ListItem","position":2,"name":"JWTデコード","item":"https://kodetto.kawatare.studio/tool-jwt.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"こでっと","item":"https://kodetto.kawatare.studio/"},{"@type":"ListItem","position":2,"name":"JWTデコード","item":"https://kodetto.kawatare.studio/tool-jwt"}]}</script>
 <style>
   :root{--bg:#f4f6fb;--card:#ffffff;--ink:#161a22;--ink-2:#586074;--muted:#949cae;--line:#e5e8f0;
     --brand:#4f6ef7;--brand-d:#3f56d6;--accent:#0ea5b7;--good:#0ca678;--good-bg:#e6f6f1;
@@ -71,7 +71,7 @@
 </style><script async src="https://www.googletagmanager.com/gtag/js?id=G-H0X1P2BBWH"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-H0X1P2BBWH');</script>
 </head><body>
-<nav class="sitebar"><a class="sb-brand" href="index.html"><span class="sb-logo">🛠️</span>こでっと</a><div class="sb-links"><a href="index.html">ツール一覧</a><a href="about.html">このサイトについて</a></div></nav>
+<nav class="sitebar"><a class="sb-brand" href="/"><span class="sb-logo">🛠️</span>こでっと</a><div class="sb-links"><a href="/">ツール一覧</a><a href="about">このサイトについて</a></div></nav>
 <div class="wrap">
   <header class="hd"><div class="brand"><div class="logo">🔑</div><div><h1>JWTデコード</h1><div class="tag">ヘッダー・ペイロードを表示</div></div></div><div class="free">⚡ 登録不要・無料</div></header>
   <div class="answer">JWTを貼り付けると、<b>ヘッダーとペイロード</b>をデコードして整形表示します。有効期限(exp)や発行時刻(iat)も日時で表示。<b>すべて端末内で処理</b>し、署名の検証は行いません（秘密鍵は不要）。</div>
@@ -85,10 +85,10 @@
   <section class="seo">
     <h2>使い方（3ステップ）</h2><div class="howto"><div class="st"><div class="n">1</div><b>JWTを貼る</b><p>header.payload.signature 形式のトークンを貼り付けます。</p></div><div class="st"><div class="n">2</div><b>デコード</b><p>ヘッダーとペイロードが整形表示されます。</p></div><div class="st"><div class="n">3</div><b>確認</b><p>exp/iat も日時で確認できます。</p></div></div>
     <h2>よくある質問</h2><div class="faq"><details open><summary>署名は検証されますか？</summary><p>いいえ。中身の確認用で、署名検証は行いません（秘密鍵を扱わないため安全です）。本番の検証はサーバー側で行ってください。</p></details><details><summary>トークンは送信されますか？</summary><p>いいえ。デコードはすべて端末内（ブラウザ）で行い、トークンは送信されません。</p></details><details><summary>日本語を含むペイロードも読めますか？</summary><p>はい。UTF-8としてデコードして表示します。</p></details></div>
-    <h2>コラム</h2><div class="rel-grid"><a class="rel" href="article-regex-learning.html">📖 正規表現が読めると何が変わる？<span>学び方のロードマップ</span></a></div>
-    <h2>ほかの開発ツール</h2><div class="rel-grid"><a class="rel" href="tool-regex.html">⚡ 正規表現テスト <span>マッチをその場で確認</span></a><a class="rel" href="tool-radix.html">🔢 進数変換 <span>2/8/10/16進数</span></a><a class="rel" href="tool-unixtime.html">⏱️ Unix時間変換 <span>epoch⇄日時</span></a><a class="rel" href="tool-color.html">🎨 カラーコード変換 <span>HEX/RGB/HSL</span></a><a class="rel" href="tool-cron.html">🗓️ cron式の解説 <span>意味を日本語で</span></a><a class="rel" href="index.html">🛠️ ツール一覧 <span>こでっとの開発ツール</span></a></div>
+    <h2>コラム</h2><div class="rel-grid"><a class="rel" href="article-regex-learning">📖 正規表現が読めると何が変わる？<span>学び方のロードマップ</span></a></div>
+    <h2>ほかの開発ツール</h2><div class="rel-grid"><a class="rel" href="tool-regex">⚡ 正規表現テスト <span>マッチをその場で確認</span></a><a class="rel" href="tool-radix">🔢 進数変換 <span>2/8/10/16進数</span></a><a class="rel" href="tool-unixtime">⏱️ Unix時間変換 <span>epoch⇄日時</span></a><a class="rel" href="tool-color">🎨 カラーコード変換 <span>HEX/RGB/HSL</span></a><a class="rel" href="tool-cron">🗓️ cron式の解説 <span>意味を日本語で</span></a><a class="rel" href="/">🛠️ ツール一覧 <span>こでっとの開発ツール</span></a></div>
   </section>
-  <div class="foot"><a href="index.html">ツール一覧</a> ・ <a href="about.html">このサイトについて</a> ・ <a href="privacy.html">プライバシー</a> ・ <a href="terms.html">利用規約</a>・<a href="https://kawatare.studio/">かわたれ studio</a><br>こでっと ・ 最終更新：2026-07-20 ・ すべての処理は端末内で完結します</div>
+  <div class="foot"><a href="/">ツール一覧</a> ・ <a href="about">このサイトについて</a> ・ <a href="privacy">プライバシー</a> ・ <a href="terms">利用規約</a>・<a href="https://kawatare.studio/">かわたれ studio</a><br>こでっと ・ 最終更新：2026-07-20 ・ すべての処理は端末内で完結します</div>
 </div>
 <script>(function(){
   var jwt=document.getElementById('jwt'),head=document.getElementById('head'),payload=document.getElementById('payload'),info=document.getElementById('info');

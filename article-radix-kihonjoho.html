@@ -3,15 +3,15 @@
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>2進数・16進数が分かると資格試験にも強くなる｜こでっと</title>
 <meta name="description" content="2進数・8進数・16進数の考え方と、基本情報技術者試験などIT資格でよく問われる進数変換のコツを解説。こでっとの進数変換ツールと合わせて学習に。">
-<link rel="canonical" href="https://kodetto.kawatare.studio/article-radix-kihonjoho.html"><meta name="theme-color" content="#4f6ef7">
+<link rel="canonical" href="https://kodetto.kawatare.studio/article-radix-kihonjoho"><meta name="theme-color" content="#4f6ef7">
 <link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="manifest" href="site.webmanifest"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="こでっと">
 <meta property="og:type" content="article"><meta property="og:site_name" content="こでっと">
 <meta property="og:title" content="2進数・16進数が分かると資格試験にも強くなる"><meta property="og:description" content="2進数・8進数・16進数の考え方と、IT資格でよく問われる進数変換のコツを解説。">
-<meta property="og:url" content="https://kodetto.kawatare.studio/article-radix-kihonjoho.html"><meta property="og:image" content="https://kodetto.kawatare.studio/ogp.png">
+<meta property="og:url" content="https://kodetto.kawatare.studio/article-radix-kihonjoho"><meta property="og:image" content="https://kodetto.kawatare.studio/ogp.png">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="2進数・16進数が分かると資格試験にも強くなる"><meta name="twitter:description" content="2進数・8進数・16進数の考え方と進数変換のコツを解説。"><meta name="twitter:image" content="https://kodetto.kawatare.studio/ogp.png">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"2進数・16進数が分かると資格試験にも強くなる","author":{"@type":"Organization","name":"かわたれ studio"},"publisher":{"@type":"Organization","name":"かわたれ studio"},"datePublished":"2026-07-25","dateModified":"2026-07-25","description":"2進数・8進数・16進数の考え方と、基本情報技術者試験などIT資格でよく問われる進数変換のコツを解説。"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"なぜコンピュータは2進数を使うのですか？","acceptedAnswer":{"@type":"Answer","text":"コンピュータの回路は「電圧が高い/低い」の2状態しか安定して扱えないため、それぞれを1と0に対応させる2進数と相性が良いからです。16進数は2進数4桁をまとめて1文字で表せるため、人間が2進数を読みやすくする目的でよく使われます。"}},{"@type":"Question","name":"基本情報技術者試験では進数変換のどんな問題が出ますか？","acceptedAnswer":{"@type":"Answer","text":"2進数⇔10進数⇔16進数の相互変換、補数を使った負の数の表現、シフト演算の結果を求める問題などが定番です。手計算の手順を理解したうえで、こでっとの進数変換ツールで答え合わせをすると効率よく練習できます。"}},{"@type":"Question","name":"16進数の色コード（#FF0000など）とは関係がありますか？","acceptedAnswer":{"@type":"Answer","text":"はい、同じ16進数の仕組みです。#FF0000のような色コードは、赤・緑・青それぞれの強さを2桁の16進数（00〜FF）で表しています。進数の考え方はカラーコードの理解にもつながります。"}}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"こでっと","item":"https://kodetto.kawatare.studio/"},{"@type":"ListItem","position":2,"name":"2進数・16進数が分かると資格試験にも強くなる","item":"https://kodetto.kawatare.studio/article-radix-kihonjoho.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"こでっと","item":"https://kodetto.kawatare.studio/"},{"@type":"ListItem","position":2,"name":"2進数・16進数が分かると資格試験にも強くなる","item":"https://kodetto.kawatare.studio/article-radix-kihonjoho"}]}</script>
 <style>
   :root{--bg:#f4f6fb;--card:#ffffff;--ink:#161a22;--ink-2:#586074;--muted:#949cae;--line:#e5e8f0;
     --brand:#4f6ef7;--brand-d:#3f56d6;--accent:#0ea5b7;--good:#0ca678;--good-bg:#e6f6f1;
@@ -45,9 +45,9 @@
 </style><script async src="https://www.googletagmanager.com/gtag/js?id=G-H0X1P2BBWH"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-H0X1P2BBWH');</script>
 </head><body>
-<nav class="sitebar"><a class="sb-brand" href="index.html"><span class="sb-logo">🛠️</span>こでっと</a><div class="sb-links"><a href="index.html">ツール一覧</a><a href="about.html">このサイトについて</a></div></nav>
+<nav class="sitebar"><a class="sb-brand" href="/"><span class="sb-logo">🛠️</span>こでっと</a><div class="sb-links"><a href="/">ツール一覧</a><a href="about">このサイトについて</a></div></nav>
 <div class="wrap">
-  <div class="crumb"><a href="index.html">ホーム</a> ／ 2進数・16進数が分かると資格試験にも強くなる</div>
+  <div class="crumb"><a href="/">ホーム</a> ／ 2進数・16進数が分かると資格試験にも強くなる</div>
   <h1 class="page-h1">2進数・16進数が分かると資格試験にも強くなる</h1>
   <p class="lead">基本情報技術者試験をはじめ、IT資格の定番テーマ「進数変換」の考え方を整理します。</p>
   <div class="cardp prose">
@@ -61,10 +61,10 @@
   <tr><td>補数表現</td><td>負の数を2進数でどう表すか（2の補数）。「全ビット反転して+1」がよく問われます。</td></tr>
   <tr><td>シフト演算</td><td>左シフトは2倍、右シフトは1/2倍に相当（符号の扱いに注意）。</td></tr>
   </table>
-  <p>手順を覚えたら、<a href="tool-radix.html">こでっとの進数変換</a>に同じ数値を入力して答え合わせをすると、計算ミスの癖に気づきやすくなります。</p>
+  <p>手順を覚えたら、<a href="tool-radix">こでっとの進数変換</a>に同じ数値を入力して答え合わせをすると、計算ミスの癖に気づきやすくなります。</p>
 
   <h2>16進数は色コードにもつながる</h2>
-  <p>Webでよく見る <code>#FF0000</code> のような色コードも16進数です。赤・緑・青それぞれの強さを00〜FFの2桁で表しています。進数の感覚が身につくと、<a href="tool-color.html">カラーコード変換</a>で扱う値もすんなり読めるようになります。</p>
+  <p>Webでよく見る <code>#FF0000</code> のような色コードも16進数です。赤・緑・青それぞれの強さを00〜FFの2桁で表しています。進数の感覚が身につくと、<a href="tool-color">カラーコード変換</a>で扱う値もすんなり読めるようになります。</p>
 
   <h2>もっと体系的に対策したい場合</h2>
   <p>進数変換は「慣れ」で伸びる分野なので、問題集を繰り返し解くのが王道です。試験全体を体系的に対策したい場合は、参考書やオンライン講座を使う方法もあります。</p>
@@ -78,13 +78,13 @@
 
   <h2>関連ツール</h2>
   <div class="rel-grid">
-    <a class="rel" href="tool-radix.html">🔢 進数変換 <span>2/8/10/16進数をまとめて</span></a>
-    <a class="rel" href="tool-color.html">🎨 カラーコード変換 <span>HEX/RGB/HSL</span></a>
+    <a class="rel" href="tool-radix">🔢 進数変換 <span>2/8/10/16進数をまとめて</span></a>
+    <a class="rel" href="tool-color">🎨 カラーコード変換 <span>HEX/RGB/HSL</span></a>
   </div>
 
-  <div class="btnrow"><a class="cta" href="index.html">ツール一覧を見る</a></div>
+  <div class="btnrow"><a class="cta" href="/">ツール一覧を見る</a></div>
   </div>
-  <footer><div><a href="index.html">ツール一覧</a>・<a href="about.html">このサイトについて</a>・<a href="privacy.html">プライバシー</a>・<a href="terms.html">利用規約</a>・<a href="https://kawatare.studio/">かわたれ studio</a></div><div>こでっと ・ 最終更新：2026-07-25</div></footer>
+  <footer><div><a href="/">ツール一覧</a>・<a href="about">このサイトについて</a>・<a href="privacy">プライバシー</a>・<a href="terms">利用規約</a>・<a href="https://kawatare.studio/">かわたれ studio</a></div><div>こでっと ・ 最終更新：2026-07-25</div></footer>
 </div>
 <!-- pwa:start -->
 <script>
