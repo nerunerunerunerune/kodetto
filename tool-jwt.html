@@ -81,7 +81,6 @@
   <label class="olabel">ヘッダー</label><pre class="codebox" id="head"></pre>
   <label class="olabel">ペイロード</label><pre class="codebox" id="payload"></pre>
 </div>
-  <div class="ad"><span style="font-weight:800;color:var(--ink-2)">広告</span>　このスペースには広告（Google AdSense）や提携リンクを表示する場合があります</div>
   <section class="seo">
     <h2>使い方（3ステップ）</h2><div class="howto"><div class="st"><div class="n">1</div><b>JWTを貼る</b><p>header.payload.signature 形式のトークンを貼り付けます。</p></div><div class="st"><div class="n">2</div><b>デコード</b><p>ヘッダーとペイロードが整形表示されます。</p></div><div class="st"><div class="n">3</div><b>確認</b><p>exp/iat も日時で確認できます。</p></div></div>
     <h2>よくある質問</h2><div class="faq"><details open><summary>署名は検証されますか？</summary><p>いいえ。中身の確認用で、署名検証は行いません（秘密鍵を扱わないため安全です）。本番の検証はサーバー側で行ってください。</p></details><details><summary>トークンは送信されますか？</summary><p>いいえ。デコードはすべて端末内（ブラウザ）で行い、トークンは送信されません。</p></details><details><summary>日本語を含むペイロードも読めますか？</summary><p>はい。UTF-8としてデコードして表示します。</p></details></div>
