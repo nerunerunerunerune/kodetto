@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JWTとは何か ― 中身の読み方と、扱うときの注意｜こでっと</title>
+<meta name="description" content="JWTの3つのパートが何を表しているか、デコードと検証の違い、開発中に見落としやすい落とし穴を、実務で必要な範囲に絞って解説します。">
+<link rel="canonical" href="https://kodetto.kawatare.studio/article-jwt-kihon">
+<meta name="theme-color" content="#4f6ef7">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="site.webmanifest"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="こでっと">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="こでっと">
+<meta property="og:title" content="JWTとは何か ― 中身の読み方と、扱うときの注意">
+<meta property="og:description" content="JWTの3つのパートが何を表しているか、デコードと検証の違い、開発中に見落としやすい落とし穴を、実務で必要な範囲に絞って解説します。">
+<meta property="og:url" content="https://kodetto.kawatare.studio/article-jwt-kihon">
+<meta property="og:image" content="https://kodetto.kawatare.studio/ogp.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="JWTとは何か ― 中身の読み方と、扱うときの注意">
+<meta name="twitter:description" content="JWTの3つのパートが何を表しているか、デコードと検証の違い、開発中に見落としやすい落とし穴を、実務で必要な範囲に絞って解説します。">
+<meta name="twitter:image" content="https://kodetto.kawatare.studio/ogp.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"JWTとは何か ― 中身の読み方と、扱うときの注意","author":{"@type":"Organization","name":"かわたれ studio"},"publisher":{"@type":"Organization","name":"かわたれ studio"},"datePublished":"2026-08-04","dateModified":"2026-08-04","description":"JWTの3つのパートが何を表しているか、デコードと検証の違い、開発中に見落としやすい落とし穴を、実務で必要な範囲に絞って解説します。"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"JWTは暗号化されていますか？","acceptedAnswer":{"@type":"Answer","text":"いいえ、暗号化されていません。ヘッダーとペイロードはBase64URLでエンコードされているだけなので、誰でもデコードして読めます。署名は改ざんを検知するためのもので、中身を隠すものではありません。秘密にしたい情報をJWTに入れないでください。"}},{"@type":"Question","name":"デコードと検証は何が違いますか？","acceptedAnswer":{"@type":"Answer","text":"デコードは中身を読むだけの作業で、鍵は不要です。検証は署名を使って改ざんされていないことを確かめる作業で、鍵が必要です。サーバー側でセキュリティ上の判断に使う場合は、必ず検証してから中身を使ってください。デコードした値をそのまま信用すると、偽造されたトークンを受け入れてしまいます。"}},{"@type":"Question","name":"ログインできない原因の調べ方は？","acceptedAnswer":{"@type":"Answer","text":"まずトークンをデコードして exp（有効期限）を確認してください。単なる期限切れであることが多くあります。次に aud や iss が想定どおりか、ヘッダーの alg がサーバーの期待と一致しているかを見ます。サーバーの時計がずれていて期限切れと判定されるケースもあります。"}},{"@type":"Question","name":"JWTを貼り付けても大丈夫ですか？","acceptedAnswer":{"@type":"Answer","text":"こでっとのJWTデコードはすべてブラウザ内で処理し、入力したトークンを外部に送信しません。ただし一般論として、本番環境の有効なトークンをオンラインのツールに貼り付けるのは避けるべきです。処理がどこで行われるかを確認してから使ってください。"}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"こでっと","item":"https://kodetto.kawatare.studio/"},{"@type":"ListItem","position":2,"name":"JWTの中身の読み方","item":"https://kodetto.kawatare.studio/article-jwt-kihon"}]}</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-H0X1P2BBWH"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-H0X1P2BBWH');</script>
+<style>
+  :root{--bg:#f4f6fb;--card:#ffffff;--ink:#161a22;--ink-2:#586074;--muted:#949cae;--line:#e5e8f0;
+    --brand:#4f6ef7;--brand-d:#3f56d6;--accent:#0ea5b7;--good:#0ca678;--good-bg:#e6f6f1;
+    --shadow:0 1px 2px rgba(20,25,45,.05),0 8px 22px rgba(20,25,45,.07);}
+  @media (prefers-color-scheme:dark){:root{--bg:#0d1017;--card:#161b26;--ink:#eef1f8;--ink-2:#a6afc2;--muted:#727c93;
+    --line:#242b3a;--brand:#7c93ff;--brand-d:#a6b6ff;--accent:#22d3ee;--good:#3fce97;--good-bg:#0f2a24;
+    --shadow:0 1px 2px rgba(0,0,0,.35),0 10px 26px rgba(0,0,0,.5);}}
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--ink);line-height:1.85;font-family:system-ui,-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;-webkit-font-smoothing:antialiased;}
+  a{color:var(--brand);}
+  .sitebar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 16px;background:var(--card);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:10;}
+  .sb-brand{display:flex;align-items:center;gap:9px;font-weight:800;text-decoration:none;color:var(--ink);font-size:16px;}
+  .sb-logo{width:30px;height:30px;border-radius:10px;background:linear-gradient(135deg,var(--brand),var(--accent));display:grid;place-items:center;color:#fff;font-size:16px;}
+  .sb-links{display:flex;gap:13px;font-size:14px;font-weight:700;} .sb-links a{text-decoration:none;color:var(--ink-2);} .sb-links a:hover{color:var(--brand);}
+  .wrap{max-width:880px;margin:0 auto;padding:24px 18px 70px;}
+  .hero{text-align:center;padding:22px 10px 6px;}
+  .hero h1{font-size:29px;margin:6px 0 12px;line-height:1.32;}
+  .hero p{font-size:15.5px;color:var(--ink-2);max-width:620px;margin:0 auto;}
+  .chips{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:18px 0 6px;}
+  .chip{font-size:12.5px;font-weight:800;color:var(--brand);background:#e8ecfd;padding:6px 13px;border-radius:20px;}
+  @media (prefers-color-scheme:dark){.chip{background:#1c2440;}}
+  h2{font-size:21px;margin:40px 0 6px;} .lead2{color:var(--ink-2);font-size:14px;margin:0 0 14px;}
+  .tools{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;} @media(max-width:720px){.tools{grid-template-columns:1fr 1fr;}} @media(max-width:460px){.tools{grid-template-columns:1fr;}}
+  .tool{display:block;text-decoration:none;color:inherit;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:var(--shadow);transition:.15s;}
+  .tool:hover{transform:translateY(-2px);border-color:var(--brand);}
+  .tool .ic{width:50px;height:50px;border-radius:14px;display:grid;place-items:center;font-size:25px;background:var(--bg);}
+  .tool h3{margin:12px 0 4px;font-size:17px;} .tool p{margin:0;font-size:13px;color:var(--ink-2);}
+  .tool .go{margin-top:10px;font-size:13px;font-weight:800;color:var(--brand);}
+  .use{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:6px;} @media(max-width:720px){.use{grid-template-columns:1fr;}}
+  .use .u{background:var(--card);border:1px solid var(--line);border-radius:15px;padding:16px;} .use .u b{display:block;margin-bottom:5px;} .use .u p{margin:0;font-size:13.5px;color:var(--ink-2);}
+  .faq{background:var(--card);border:1px solid var(--line);border-radius:15px;padding:6px 18px;}
+  .faq details{border-bottom:1px solid var(--line);padding:13px 0;} .faq details:last-child{border-bottom:none;}
+  .faq summary{font-weight:800;cursor:pointer;font-size:15px;} .faq p{font-size:13.5px;color:var(--ink-2);margin:8px 0 0;}
+  .crumb{font-size:12.5px;color:var(--muted);margin:2px 0 14px;} .crumb a{color:var(--ink-2);text-decoration:none;}
+  .page-h1{font-size:26px;margin:4px 0 6px;} .lead{font-size:15px;color:var(--ink-2);margin:0 0 20px;}
+  .cardp{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 24px;box-shadow:var(--shadow);}
+  .prose h2{font-size:19px;margin:28px 0 10px;padding-bottom:6px;border-bottom:2px solid var(--line);} .prose h2:first-child{margin-top:4px;}
+  .prose p{margin:8px 0;font-size:14.5px;} .prose ul{margin:8px 0;padding-left:22px;} .prose li{margin:6px 0;font-size:14.5px;}
+  .prose dt{font-weight:800;font-size:14px;margin-top:12px;} .prose dd{margin:2px 0 0;font-size:14.5px;color:var(--ink-2);}
+  .cta{display:inline-block;text-decoration:none;font-weight:800;font-size:15px;padding:12px 22px;border-radius:13px;background:var(--brand);color:#fff;margin-top:8px;}
+  footer{margin-top:46px;padding-top:18px;border-top:1px solid var(--line);font-size:13px;color:var(--muted);text-align:center;line-height:2;}
+  footer a{color:var(--ink-2);text-decoration:none;margin:0 7px;}
+
+  .prose h3{font-size:16px;margin:20px 0 6px;}
+  .prose ol{margin:8px 0;padding-left:22px;} .prose ol li{margin:8px 0;font-size:14.5px;}
+  .prose table{width:100%;border-collapse:collapse;margin:10px 0;font-size:13.5px;} .prose td,.prose th{border:1px solid var(--line);padding:7px 10px;text-align:left;}
+  .rel-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px;} @media(max-width:600px){.rel-grid{grid-template-columns:1fr;}}
+  .rel{display:block;text-decoration:none;color:inherit;background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:14px;font-weight:800;} .rel:hover{border-color:var(--brand);}
+  .rel span{display:block;font-size:12px;color:var(--ink-2);font-weight:500;margin-top:2px;}
+  .note{background:var(--good-bg);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin:18px 0;font-size:13.5px;color:var(--ink-2);}
+</style>
+</head>
+<body>
+<nav class="sitebar"><a class="sb-brand" href="/"><span class="sb-logo">🛠️</span>こでっと</a><div class="sb-links"><a href="/">ツール一覧</a><a href="about">このサイトについて</a></div></nav>
+<div class="wrap">
+  <div class="crumb"><a href="/">ホーム</a> ／ JWTの中身の読み方</div>
+  <h1 class="page-h1">JWTとは何か ― 中身の読み方と、扱うときの注意</h1>
+  <p class="lead">「読める」ことと「信用してよい」ことは別だ、という点がすべてです。</p>
+  <div class="cardp prose">
+
+  <h2>結論</h2>
+  <p>JWT（JSON Web Token）は、認証情報を1本の文字列にまとめて受け渡すための形式です。<b>暗号化されていません。</b>誰でもデコードして中身を読めます。</p>
+  <p>だから重要なのは2点です。第一に、<b>秘密にしたい情報をJWTに入れてはいけません</b>。第二に、受け取ったJWTは<b>署名を検証してから信用する</b>必要があります。読めることと、改ざんされていないことは別の話です。</p>
+
+  <h2>3つのパートでできている</h2>
+  <p>JWTは <code>xxxxx.yyyyy.zzzzz</code> のように、ピリオドで区切られた3つの部分からできています。</p>
+  <table><tr><th>部分</th><th>名前</th><th>中身</th></tr>
+  <tr><td>1つ目</td><td>ヘッダー</td><td>署名アルゴリズム（alg）とトークンの種類（typ）</td></tr>
+  <tr><td>2つ目</td><td>ペイロード</td><td>ユーザーIDや有効期限などの情報（クレーム）</td></tr>
+  <tr><td>3つ目</td><td>署名</td><td>ヘッダーとペイロードが改ざんされていないことを示す値</td></tr>
+  </table>
+  <p>1つ目と2つ目は<b>Base64URLでエンコードされているだけ</b>です。暗号化ではないので、デコードすれば誰でも読めます。Base64を手動で戻しても読めますし、<a href="tool-jwt">JWTデコード</a>を使えば3つを一度に展開できます。</p>
+
+  <h2>よく使われるクレーム</h2>
+  <p>ペイロードに入る項目をクレームと呼びます。標準的に決まっているものがいくつかあります。</p>
+  <ul>
+    <li><b>exp</b>（Expiration Time）：有効期限。Unix時間で入っていることが多く、<a href="tool-unixtime">Unix時間変換</a>で日時に直せます。</li>
+    <li><b>iat</b>（Issued At）：発行時刻。</li>
+    <li><b>nbf</b>（Not Before）：この時刻より前は使えない、という開始時刻。</li>
+    <li><b>iss</b>（Issuer）：発行者。誰が出したトークンか。</li>
+    <li><b>aud</b>（Audience）：想定される受け取り手。自分向けかどうかの判定に使います。</li>
+    <li><b>sub</b>（Subject）：主体。ユーザーIDが入ることが多い項目です。</li>
+  </ul>
+  <p>デバッグでいちばんよく見るのは <code>exp</code> です。「ログインできない」の原因が単なる期限切れだった、というのはよくあります。まず期限を確認する癖をつけると、調査が速くなります。</p>
+
+  <h2>デコードと検証は別の作業</h2>
+  <p>ここが最も誤解されやすい点です。</p>
+  <ul>
+    <li><b>デコード</b>：Base64URLを元に戻して中身を読むこと。鍵は不要で、誰でもできます。</li>
+    <li><b>検証</b>：署名を使って、改ざんされていないことと発行者が正しいことを確かめること。鍵が必要です。</li>
+  </ul>
+  <p>デコードしただけのペイロードを信用して処理を進めると、<b>誰でも中身を書き換えたトークンを作れてしまいます</b>。「管理者フラグを true にしたペイロードを自分で作って送る」といった攻撃が成立します。サーバー側では必ず署名を検証してから中身を使ってください。</p>
+  <p>逆に、ブラウザ側で有効期限を見て画面表示を切り替える、といった用途ならデコードだけでも構いません。<b>セキュリティ上の判断に使うかどうか</b>が境目です。</p>
+
+  <h2>つまずきやすい点</h2>
+  <ul>
+    <li><b>秘密情報を入れてしまう</b>：パスワードや個人情報をペイロードに入れると、そのまま読まれます。入れてよいのは、読まれても困らない識別子だけです。</li>
+    <li><b>alg を none にできてしまう</b>：ヘッダーのalgを none にして署名なしのトークンを作られる攻撃があります。サーバー側で許可するアルゴリズムを固定してください。</li>
+    <li><b>有効期限が長すぎる</b>：一度漏れたトークンは、期限が切れるまで有効です。短くして更新する設計のほうが安全です。</li>
+    <li><b>失効させられない</b>：JWTは発行後にサーバー側で無効化するのが原理的に難しい形式です。ログアウトを即座に反映したい場合は、別途無効化リストを持つなどの設計が要ります。</li>
+    <li><b>保存場所を考えていない</b>：ブラウザのどこに置くかで、盗まれ方が変わります。設計時に検討すべき論点です。</li>
+  </ul>
+
+  <h2>セッションとJWT、どちらを使うか</h2>
+  <p>ログイン状態の保持には、大きく2つの方式があります。JWTを使う方式と、サーバー側にセッションを持つ方式です。どちらが優れているということはなく、性質が違います。</p>
+  <table><tr><th></th><th>JWT</th><th>サーバーセッション</th></tr>
+  <tr><td>状態の置き場所</td><td>トークンの中（クライアント側）</td><td>サーバー側</td></tr>
+  <tr><td>サーバーを増やしたとき</td><td>そのまま動く</td><td>共有の仕組みが要る</td></tr>
+  <tr><td>即時失効</td><td>難しい</td><td>容易</td></tr>
+  <tr><td>情報を変えたとき</td><td>再発行するまで古いまま</td><td>すぐ反映される</td></tr>
+  </table>
+  <p>サーバーを複数台に分散する構成ではJWTが扱いやすく、ログアウトや権限変更を即座に反映したい要件が強い場合はセッションのほうが素直です。<b>要件から選ぶ</b>のであって、新しいほうが良いという話ではありません。</p>
+  <p>実務では両者を組み合わせる形もよく使われます。短命なJWTを発行し、それを更新するための別のトークンをサーバー側で管理する構成です。この形なら、分散のしやすさと失効のしやすさをある程度両立できます。</p>
+
+  <h2>デバッグの進め方</h2>
+  <ol>
+    <li><b>まずデコードして中身を見る</b>：exp が切れていないか、sub や aud が想定どおりかを確認します。ここで9割の問題は切り分けられます。</li>
+    <li><b>ヘッダーの alg を確認する</b>：サーバーが期待しているアルゴリズムと一致しているかを見ます。</li>
+    <li><b>時刻のずれを疑う</b>：サーバーの時計がずれていると、有効なトークンが期限切れと判定されます。<a href="tool-unixtime">Unix時間変換</a>で exp を日時に直し、現在時刻と比べてください。</li>
+    <li><b>署名の検証は本番の鍵で行う</b>：手元のツールで中身が読めても、署名が正しいかは別問題です。検証は鍵を持っている環境で行います。</li>
+  </ol>
+
+  <h2>今すぐ使えるツール</h2>
+  <p>こでっとの<a href="tool-jwt">JWTデコード</a>は、トークンを貼り付けるとヘッダーとペイロードを整形して表示します。<b>すべてブラウザ内で処理され、貼り付けたトークンが外部に送信されることはありません。</b>本番のトークンを扱う場面では、この点が重要になります。</p>
+  <p>有効期限を日時に直すなら<a href="tool-unixtime">Unix時間変換</a>。Base64そのものを個別に扱いたい場合は、同じ かわたれ studio の<a href="https://kawatare.studio/tool-base64">Base64変換</a>が使えます。</p>
+
+
+  <h2>よくある質問</h2>
+  <h3>JWTは暗号化されていますか？</h3>
+  <p>いいえ、暗号化されていません。ヘッダーとペイロードはBase64URLでエンコードされているだけなので、誰でもデコードして読めます。署名は改ざんを検知するためのもので、中身を隠すものではありません。秘密にしたい情報をJWTに入れないでください。</p>
+  <h3>デコードと検証は何が違いますか？</h3>
+  <p>デコードは中身を読むだけの作業で、鍵は不要です。検証は署名を使って改ざんされていないことを確かめる作業で、鍵が必要です。サーバー側でセキュリティ上の判断に使う場合は、必ず検証してから中身を使ってください。デコードした値をそのまま信用すると、偽造されたトークンを受け入れてしまいます。</p>
+  <h3>ログインできない原因の調べ方は？</h3>
+  <p>まずトークンをデコードして exp（有効期限）を確認してください。単なる期限切れであることが多くあります。次に aud や iss が想定どおりか、ヘッダーの alg がサーバーの期待と一致しているかを見ます。サーバーの時計がずれていて期限切れと判定されるケースもあります。</p>
+  <h3>JWTを貼り付けても大丈夫ですか？</h3>
+  <p>こでっとのJWTデコードはすべてブラウザ内で処理し、入力したトークンを外部に送信しません。ただし一般論として、本番環境の有効なトークンをオンラインのツールに貼り付けるのは避けるべきです。処理がどこで行われるかを確認してから使ってください。</p>
+
+  <h2>関連ツール</h2>
+  <div class="rel-grid">
+    <a class="rel" href="tool-jwt">🔑 JWTデコード <span>ヘッダー/ペイロードを表示</span></a>
+    <a class="rel" href="tool-unixtime">⏱️ Unix時間変換 <span>epoch⇄日時を相互変換</span></a>
+  </div>
+
+  <div><a class="cta" href="/">ツール一覧を見る</a></div>
+  </div>
+  <footer><div><a href="/">ツール一覧</a>・<a href="about">このサイトについて</a>・<a href="privacy">プライバシー</a>・<a href="terms">利用規約</a>・<a href="https://kawatare.studio/">かわたれ studio</a></div><div>こでっと ・ 最終更新：2026-08-04</div></footer>
+</div>
+</body>
+</html>
