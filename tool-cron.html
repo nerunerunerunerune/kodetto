@@ -55,6 +55,9 @@
   .codebox{background:var(--bg);border:1px solid var(--line);border-radius:11px;padding:12px;overflow:auto;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px;white-space:pre-wrap;word-break:break-all;margin:2px 0 10px;min-height:38px;}
   .ad{border:1px dashed var(--line);border-radius:14px;padding:14px;text-align:center;color:var(--muted);font-size:12px;background:var(--card);margin:16px 0;}
   .seo h2{font-size:18px;margin:26px 0 10px;}
+  .seo p{font-size:14.5px;line-height:1.9;margin:8px 0;}
+  .seo ul{margin:8px 0;padding-left:22px;} .seo li{font-size:14.5px;line-height:1.9;margin:6px 0;}
+  .note-read{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--brand);border-radius:10px;padding:12px 16px;margin:14px 0;font-size:14px;line-height:1.9;}
   .howto{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;} @media(max-width:600px){.howto{grid-template-columns:1fr;}}
   .howto .st{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;}
   .howto .st .n{width:26px;height:26px;border-radius:50%;background:var(--brand);color:#fff;font-weight:800;display:grid;place-items:center;font-size:14px;}
@@ -82,7 +85,30 @@
 </div>
   <section class="seo">
     <h2>使い方（3ステップ）</h2><div class="howto"><div class="st"><div class="n">1</div><b>cron式を入れる</b><p>「0 9 * * 1-5」のように5項目で入力します。</p></div><div class="st"><div class="n">2</div><b>解説</b><p>実行タイミングが日本語で表示されます。</p></div><div class="st"><div class="n">3</div><b>確認</b><p>各項目の値も一覧で確認できます。</p></div></div>
-    <h2>よくある質問</h2><div class="faq"><details open><summary>どの形式に対応していますか？</summary><p>標準的な5項目（分 時 日 月 曜日）のcronに対応します。*、範囲(1-5)、リスト(1,3,5)、間隔(*/5)などを解釈します。</p></details><details><summary>曜日の数字は？</summary><p>0または7が日曜、1が月曜…6が土曜です。1-5は平日（月〜金）を表します。</p></details><details><summary>データは送信されますか？</summary><p>いいえ。すべて端末内で解釈します。</p></details></div>
+    
+  <h2>日本語で解説する形にしてある訳</h2>
+  <p>cron式を入れると、実行タイミングを日本語の文にして返します。数値の分解表を出すだけにしていないのは、<b>読み違えは分解では防げない</b>からです。</p>
+  <p>たとえば <code>0 0 1 * 1</code>。日は1、曜日は月曜。直感では「1日かつ月曜」と読みたくなりますが、正しくは「1日、または月曜」です。日と曜日の両方を指定するとOR条件になる。この仕様は分解表を眺めても気づけません。文にして初めて、意図と違うことが分かります。</p>
+  <p>設定する前にここを通してほしいのは、そのためです。cronは間違っていても静かに動きます。動かないことより、想定と違う頻度で動いていることのほうが厄介です。</p>
+
+  <div class="note-read">
+    <b>式が正しくても動かない原因は、たいてい式の外にあります。</b>サーバーのタイムゾーンがUTCのままだと、<code>0 3 * * *</code> は日本時間の正午に動く。コマンドをフルパスで書いていない、実行権限がない、出力を捨てていてエラーに気づけない——この4つでほぼ説明がつきます。式の検証はここでできますが、環境の確認はサーバー側でしかできません。
+  </div>
+
+  <h2>この画面で分からないこと</h2>
+  <ul>
+    <li><b>次に実行される実際の日時</b>：サーバーのタイムゾーンと現在時刻に依存するため、この画面からは確定できません。</li>
+    <li><b>特殊な拡張構文</b>：<code>@reboot</code> や秒フィールドを持つ実装など、環境によって独自の拡張があります。</li>
+    <li><b>多重起動するかどうか</b>：処理時間が実行間隔を超えると重なって動きます。式だけでは判断できないので、排他制御は自分で入れてください。</li>
+  </ul>
+
+  <h2>運用の考え方は別記事に</h2>
+  <div class="rel-grid">
+    <a class="rel" href="article-cron-server">📖 cron式が読めると何ができる？ <span>早見表と、事故が起きる場所</span></a>
+    <a class="rel" href="article-jwt-kihon">📖 JWTとは何か <span>サーバー運用まわりのもう一つの基礎</span></a>
+  </div>
+
+  <h2>よくある質問</h2><div class="faq"><details open><summary>どの形式に対応していますか？</summary><p>標準的な5項目（分 時 日 月 曜日）のcronに対応します。*、範囲(1-5)、リスト(1,3,5)、間隔(*/5)などを解釈します。</p></details><details><summary>曜日の数字は？</summary><p>0または7が日曜、1が月曜…6が土曜です。1-5は平日（月〜金）を表します。</p></details><details><summary>データは送信されますか？</summary><p>いいえ。すべて端末内で解釈します。</p></details></div>
     <h2>コラム</h2><div class="rel-grid"><a class="rel" href="article-cron-server">📖 cron式が読めると何ができる？<span>サーバー運用の基本</span></a></div>
     <h2>ほかの開発ツール</h2><div class="rel-grid"><a class="rel" href="tool-regex">⚡ 正規表現テスト <span>マッチをその場で確認</span></a><a class="rel" href="tool-radix">🔢 進数変換 <span>2/8/10/16進数</span></a><a class="rel" href="tool-unixtime">⏱️ Unix時間変換 <span>epoch⇄日時</span></a><a class="rel" href="tool-color">🎨 カラーコード変換 <span>HEX/RGB/HSL</span></a><a class="rel" href="tool-jwt">🔑 JWTデコード <span>ヘッダー/ペイロード</span></a><a class="rel" href="/">🛠️ ツール一覧 <span>こでっとの開発ツール</span></a></div>
   </section>

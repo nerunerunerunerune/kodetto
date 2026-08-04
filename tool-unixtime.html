@@ -55,6 +55,9 @@
   .codebox{background:var(--bg);border:1px solid var(--line);border-radius:11px;padding:12px;overflow:auto;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px;white-space:pre-wrap;word-break:break-all;margin:2px 0 10px;min-height:38px;}
   .ad{border:1px dashed var(--line);border-radius:14px;padding:14px;text-align:center;color:var(--muted);font-size:12px;background:var(--card);margin:16px 0;}
   .seo h2{font-size:18px;margin:26px 0 10px;}
+  .seo p{font-size:14.5px;line-height:1.9;margin:8px 0;}
+  .seo ul{margin:8px 0;padding-left:22px;} .seo li{font-size:14.5px;line-height:1.9;margin:6px 0;}
+  .note-read{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--brand);border-radius:10px;padding:12px 16px;margin:14px 0;font-size:14px;line-height:1.9;}
   .howto{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;} @media(max-width:600px){.howto{grid-template-columns:1fr;}}
   .howto .st{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;}
   .howto .st .n{width:26px;height:26px;border-radius:50%;background:var(--brand);color:#fff;font-weight:800;display:grid;place-items:center;font-size:14px;}
@@ -83,7 +86,30 @@
 </div>
   <section class="seo">
     <h2>使い方（3ステップ）</h2><div class="howto"><div class="st"><div class="n">1</div><b>方向を選ぶ</b><p>Unix→日時 か 日時→Unix を選びます。</p></div><div class="st"><div class="n">2</div><b>値を入れる</b><p>epoch値、または日時を入力します。</p></div><div class="st"><div class="n">3</div><b>確認</b><p>各形式の値が表示されます。</p></div></div>
-    <h2>よくある質問</h2><div class="faq"><details open><summary>秒とミリ秒はどう判別しますか？</summary><p>桁数で自動判別します（13桁以上はミリ秒として扱います）。</p></details><details><summary>タイムゾーンは？</summary><p>ローカル（お使いの端末の設定）とUTCの両方を表示します。</p></details><details><summary>データは送信されますか？</summary><p>いいえ。すべて端末内で計算します。</p></details></div>
+    
+  <h2>ローカル・UTC・ISO8601を並べている訳</h2>
+  <p>epoch値を1つの日時に直すのではなく、3つの表記で同時に出しています。<b>時差の取り違えが、この領域でいちばん多い事故だから</b>です。</p>
+  <p>ログに残っている時刻がUTCで、手元の端末は日本時間。9時間ずれた状態で「この時刻には何も起きていない」と結論を出す——調査の途中でこれをやると、原因にたどり着けません。両方を並べておけば、どちらの時間軸の話をしているかが常に見えます。</p>
+  <p>ISO8601を出しているのは、APIやログのやりとりでこの形式が使われるためです。<code>2026-08-05T09:00:00+09:00</code> のようにオフセットまで含む表記なら、受け取った側が時差を取り違えません。</p>
+
+  <div class="note-read">
+    <b>秒とミリ秒を取り違えていないか確認してください。</b>epoch秒は10桁、ミリ秒は13桁です。JavaScriptの <code>Date.now()</code> はミリ秒を返すので、他の言語やAPIとやりとりするときに1000倍ずれます。桁数を見れば一目で分かるので、変換結果が1970年や遠い未来になっていたら、まずここを疑ってください。
+  </div>
+
+  <h2>この変換で気をつけること</h2>
+  <ul>
+    <li><b>うるう秒</b>：epoch時間はうるう秒を数えません。厳密な時刻を扱う用途では前提を確認してください。</li>
+    <li><b>夏時間</b>：日本には関係ありませんが、海外のタイムゾーンでは同じ現地時刻が年に2回存在する日があります。</li>
+    <li><b>2038年問題</b>：32ビットの符号付き整数でepoch秒を扱う古いシステムは、2038年に上限へ到達します。</li>
+  </ul>
+
+  <h2>定期実行とあわせて</h2>
+  <div class="rel-grid">
+    <a class="rel" href="article-cron-server">📖 cron式が読めると何ができる？ <span>タイムゾーンで起きる事故</span></a>
+    <a class="rel" href="article-jwt-kihon">📖 JWTとは何か <span>expをUnix時間で読む</span></a>
+  </div>
+
+  <h2>よくある質問</h2><div class="faq"><details open><summary>秒とミリ秒はどう判別しますか？</summary><p>桁数で自動判別します（13桁以上はミリ秒として扱います）。</p></details><details><summary>タイムゾーンは？</summary><p>ローカル（お使いの端末の設定）とUTCの両方を表示します。</p></details><details><summary>データは送信されますか？</summary><p>いいえ。すべて端末内で計算します。</p></details></div>
     <h2>コラム</h2><div class="rel-grid"><a class="rel" href="article-cron-server">📖 cron式が読めると何ができる？<span>サーバー運用の基本</span></a></div>
     <h2>ほかの開発ツール</h2><div class="rel-grid"><a class="rel" href="tool-regex">⚡ 正規表現テスト <span>マッチをその場で確認</span></a><a class="rel" href="tool-radix">🔢 進数変換 <span>2/8/10/16進数</span></a><a class="rel" href="tool-color">🎨 カラーコード変換 <span>HEX/RGB/HSL</span></a><a class="rel" href="tool-jwt">🔑 JWTデコード <span>ヘッダー/ペイロード</span></a><a class="rel" href="tool-cron">🗓️ cron式の解説 <span>意味を日本語で</span></a><a class="rel" href="/">🛠️ ツール一覧 <span>こでっとの開発ツール</span></a></div>
   </section>

@@ -55,6 +55,9 @@
   .codebox{background:var(--bg);border:1px solid var(--line);border-radius:11px;padding:12px;overflow:auto;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px;white-space:pre-wrap;word-break:break-all;margin:2px 0 10px;min-height:38px;}
   .ad{border:1px dashed var(--line);border-radius:14px;padding:14px;text-align:center;color:var(--muted);font-size:12px;background:var(--card);margin:16px 0;}
   .seo h2{font-size:18px;margin:26px 0 10px;}
+  .seo p{font-size:14.5px;line-height:1.9;margin:8px 0;}
+  .seo ul{margin:8px 0;padding-left:22px;} .seo li{font-size:14.5px;line-height:1.9;margin:6px 0;}
+  .note-read{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--brand);border-radius:10px;padding:12px 16px;margin:14px 0;font-size:14px;line-height:1.9;}
   .howto{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;} @media(max-width:600px){.howto{grid-template-columns:1fr;}}
   .howto .st{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;}
   .howto .st .n{width:26px;height:26px;border-radius:50%;background:var(--brand);color:#fff;font-weight:800;display:grid;place-items:center;font-size:14px;}
@@ -82,7 +85,30 @@
 </div>
   <section class="seo">
     <h2>使い方（3ステップ）</h2><div class="howto"><div class="st"><div class="n">1</div><b>色を入れる</b><p>HEX・rgb()・hsl() のいずれか、またはピッカーで選択。</p></div><div class="st"><div class="n">2</div><b>変換</b><p>HEX/RGB/HSLに一括変換します。</p></div><div class="st"><div class="n">3</div><b>確認</b><p>プレビューと各コードを確認できます。</p></div></div>
-    <h2>よくある質問</h2><div class="faq"><details open><summary>3桁のHEX（#abc）に対応していますか？</summary><p>はい。3桁・6桁のHEX、rgb()、hsl() を認識します。</p></details><details><summary>透明度（アルファ）は？</summary><p>現在はRGB/HSLの色相・彩度・明度に対応しています。アルファは今後の対応予定です。</p></details><details><summary>データは送信されますか？</summary><p>いいえ。すべて端末内で計算します。</p></details></div>
+    
+  <h2>HSLを併記している訳</h2>
+  <p>HEXとRGBだけでも色は表せます。それでもHSLを常に出しているのは、<b>色を「調整する」段になると、この形式でないと手が出せない</b>からです。</p>
+  <p>ボタンのホバー時に少し暗くしたい。HEXでやろうとすると、2桁の数字を3つ、勘で下げることになります。たいてい色味がずれて濁る。HSLなら明度（L）の数字を1つ下げるだけで、色相はそのままです。</p>
+  <p>だからこの画面は「変換する道具」であると同時に、<b>いま使っている色のH・S・Lがいくつなのかを知るための道具</b>でもあります。ブランドカラーのLを10刻みで振れば、それだけで統一感のあるパレットになります。</p>
+
+  <div class="note-read">
+    <b>コントラストの判定はしていません。</b>薄いグレーの文字は画面上では上品に見えますが、明るい場所や視力の条件によっては読めなくなります。本文の色を決めるときは、背景との明度差が十分にあるか別途確認してください。装飾として薄くしてよいのは補足情報だけです。
+  </div>
+
+  <h2>この画面で分からないこと</h2>
+  <ul>
+    <li><b>配色として成立しているか</b>：変換は正確でも、その色の組み合わせが読みやすいかは別の判断です。</li>
+    <li><b>色の見え方の個人差</b>：色だけで情報を伝えると、伝わらない人がいます。アイコンや文言を併記してください。</li>
+    <li><b>印刷したときの色</b>：画面の発色と印刷物の色は一致しません。</li>
+  </ul>
+
+  <h2>配色の考え方は別記事に</h2>
+  <div class="rel-grid">
+    <a class="rel" href="article-color-design">📖 HEX・RGB・HSLの違いとは？ <span>使い分けとCSS変数での管理</span></a>
+    <a class="rel" href="article-radix-kihonjoho">📖 2進数・16進数が分かると資格試験にも強くなる <span>色コードの16進数を読む</span></a>
+  </div>
+
+  <h2>よくある質問</h2><div class="faq"><details open><summary>3桁のHEX（#abc）に対応していますか？</summary><p>はい。3桁・6桁のHEX、rgb()、hsl() を認識します。</p></details><details><summary>透明度（アルファ）は？</summary><p>現在はRGB/HSLの色相・彩度・明度に対応しています。アルファは今後の対応予定です。</p></details><details><summary>データは送信されますか？</summary><p>いいえ。すべて端末内で計算します。</p></details></div>
     <h2>コラム</h2><div class="rel-grid"><a class="rel" href="article-color-design">📖 HEX・RGB・HSLの違いとは？<span>配色の基礎知識</span></a></div>
     <h2>ほかの開発ツール</h2><div class="rel-grid"><a class="rel" href="tool-regex">⚡ 正規表現テスト <span>マッチをその場で確認</span></a><a class="rel" href="tool-radix">🔢 進数変換 <span>2/8/10/16進数</span></a><a class="rel" href="tool-unixtime">⏱️ Unix時間変換 <span>epoch⇄日時</span></a><a class="rel" href="tool-jwt">🔑 JWTデコード <span>ヘッダー/ペイロード</span></a><a class="rel" href="tool-cron">🗓️ cron式の解説 <span>意味を日本語で</span></a><a class="rel" href="/">🛠️ ツール一覧 <span>こでっとの開発ツール</span></a></div>
   </section>

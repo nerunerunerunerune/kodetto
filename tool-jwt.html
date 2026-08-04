@@ -55,6 +55,9 @@
   .codebox{background:var(--bg);border:1px solid var(--line);border-radius:11px;padding:12px;overflow:auto;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px;white-space:pre-wrap;word-break:break-all;margin:2px 0 10px;min-height:38px;}
   .ad{border:1px dashed var(--line);border-radius:14px;padding:14px;text-align:center;color:var(--muted);font-size:12px;background:var(--card);margin:16px 0;}
   .seo h2{font-size:18px;margin:26px 0 10px;}
+  .seo p{font-size:14.5px;line-height:1.9;margin:8px 0;}
+  .seo ul{margin:8px 0;padding-left:22px;} .seo li{font-size:14.5px;line-height:1.9;margin:6px 0;}
+  .note-read{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--brand);border-radius:10px;padding:12px 16px;margin:14px 0;font-size:14px;line-height:1.9;}
   .howto{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;} @media(max-width:600px){.howto{grid-template-columns:1fr;}}
   .howto .st{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;}
   .howto .st .n{width:26px;height:26px;border-radius:50%;background:var(--brand);color:#fff;font-weight:800;display:grid;place-items:center;font-size:14px;}
@@ -83,7 +86,31 @@
 </div>
   <section class="seo">
     <h2>使い方（3ステップ）</h2><div class="howto"><div class="st"><div class="n">1</div><b>JWTを貼る</b><p>header.payload.signature 形式のトークンを貼り付けます。</p></div><div class="st"><div class="n">2</div><b>デコード</b><p>ヘッダーとペイロードが整形表示されます。</p></div><div class="st"><div class="n">3</div><b>確認</b><p>exp/iat も日時で確認できます。</p></div></div>
-    <h2>よくある質問</h2><div class="faq"><details open><summary>署名は検証されますか？</summary><p>いいえ。中身の確認用で、署名検証は行いません（秘密鍵を扱わないため安全です）。本番の検証はサーバー側で行ってください。</p></details><details><summary>トークンは送信されますか？</summary><p>いいえ。デコードはすべて端末内（ブラウザ）で行い、トークンは送信されません。</p></details><details><summary>日本語を含むペイロードも読めますか？</summary><p>はい。UTF-8としてデコードして表示します。</p></details></div>
+    
+  <h2>署名の「検証」をしていないことの意味</h2>
+  <p>この画面がやっているのは<b>デコードだけ</b>です。署名が正しいかどうかは確認していません。これは機能不足ではなく、できないことです。</p>
+  <p>署名の検証には鍵が要ります。鍵はサーバー側で秘密に保つものなので、ブラウザで動くツールに渡すべきものではありません。ここで中身が読めたからといって、そのトークンが本物である保証はどこにもない。</p>
+  <p>裏を返せば、<b>鍵がなくても誰でも中身を読める</b>ということでもあります。JWTは暗号化されておらず、Base64URLで符号化されているだけ。パスワードや個人情報をペイロードに入れてはいけないのは、このためです。</p>
+
+  <div class="note-read">
+    <b>貼り付けたトークンは端末の外に出ません。</b>デコードはすべてブラウザ内で処理しています。ただし一般論として、本番環境の有効なトークンをオンラインのツールに貼るのは避けるべき習慣です。処理がどこで行われるかを確認してから使ってください。この画面を信用してほしいのではなく、確認する癖のほうを持ってほしい。
+  </div>
+
+  <h2>デバッグで最初に見るところ</h2>
+  <ul>
+    <li><b>exp（有効期限）</b>：「ログインできない」の原因は、単なる期限切れであることが最も多い。Unix時間で入っているので、日時に直して現在時刻と比べてください。</li>
+    <li><b>ヘッダーの alg</b>：サーバーが期待するアルゴリズムと一致しているか。<code>none</code> を許可する実装は攻撃対象になります。</li>
+    <li><b>aud / iss</b>：自分向けのトークンか、想定した発行者か。マイクロサービス間で取り違えると、認証は通るのに権限が合わない状態になります。</li>
+    <li><b>サーバーの時計</b>：数分ずれているだけで、有効なトークンが期限切れと判定されます。これはトークン側を見ても分かりません。</li>
+  </ul>
+
+  <h2>扱い方をもう少し詳しく</h2>
+  <div class="rel-grid">
+    <a class="rel" href="article-jwt-kihon">📖 JWTとは何か <span>デコードと検証の違い、設計の選択</span></a>
+    <a class="rel" href="article-regex-learning">📖 正規表現が読めると何が変わる？ <span>入力検証を設計する側の話</span></a>
+  </div>
+
+  <h2>よくある質問</h2><div class="faq"><details open><summary>署名は検証されますか？</summary><p>いいえ。中身の確認用で、署名検証は行いません（秘密鍵を扱わないため安全です）。本番の検証はサーバー側で行ってください。</p></details><details><summary>トークンは送信されますか？</summary><p>いいえ。デコードはすべて端末内（ブラウザ）で行い、トークンは送信されません。</p></details><details><summary>日本語を含むペイロードも読めますか？</summary><p>はい。UTF-8としてデコードして表示します。</p></details></div>
     <h2>コラム</h2><div class="rel-grid"><a class="rel" href="article-regex-learning">📖 正規表現が読めると何が変わる？<span>学び方のロードマップ</span></a></div>
     <h2>ほかの開発ツール</h2><div class="rel-grid"><a class="rel" href="tool-regex">⚡ 正規表現テスト <span>マッチをその場で確認</span></a><a class="rel" href="tool-radix">🔢 進数変換 <span>2/8/10/16進数</span></a><a class="rel" href="tool-unixtime">⏱️ Unix時間変換 <span>epoch⇄日時</span></a><a class="rel" href="tool-color">🎨 カラーコード変換 <span>HEX/RGB/HSL</span></a><a class="rel" href="tool-cron">🗓️ cron式の解説 <span>意味を日本語で</span></a><a class="rel" href="/">🛠️ ツール一覧 <span>こでっとの開発ツール</span></a></div>
   </section>
