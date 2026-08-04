@@ -9,8 +9,8 @@
 <meta property="og:title" content="HEX・RGB・HSLの違いとは？配色の基礎知識"><meta property="og:description" content="HEX・RGB・HSLそれぞれの色の表し方の違いと使い分け、配色の基礎知識を解説。">
 <meta property="og:url" content="https://kodetto.kawatare.studio/article-color-design"><meta property="og:image" content="https://kodetto.kawatare.studio/ogp.png">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="HEX・RGB・HSLの違いとは？配色の基礎知識"><meta name="twitter:description" content="HEX・RGB・HSLそれぞれの色の表し方の違いと使い分けを解説。"><meta name="twitter:image" content="https://kodetto.kawatare.studio/ogp.png">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"HEX・RGB・HSLの違いとは？配色の基礎知識","author":{"@type":"Organization","name":"かわたれ studio"},"publisher":{"@type":"Organization","name":"かわたれ studio"},"datePublished":"2026-07-25","dateModified":"2026-07-25","description":"HEX・RGB・HSLそれぞれの色の表し方の違いと使い分け、配色を考えるときの基礎知識を解説。"}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"HEXとRGBはどちらを使うべきですか？","acceptedAnswer":{"@type":"Answer","text":"CSSではどちらも使えます。HEX（#FF0000）は短く書けるので広く使われ、RGBは透明度（アルファ値）を扱いたいときに rgba() の形で使うと便利です。デザインツール間の受け渡しはHEXが定番です。"}},{"@type":"Question","name":"HSLはどんな時に便利ですか？","acceptedAnswer":{"@type":"Answer","text":"色相（Hue）・彩度（Saturation）・明度（Lightness）で指定するため、「同じ色味で明るさだけ変える」「彩度だけ落とす」といった調整が直感的にできます。ボタンのホバー時に少し明るくする、といった実装で重宝します。"}},{"@type":"Question","name":"配色の基本ルールはありますか？","acceptedAnswer":{"@type":"Answer","text":"よく使われるのは「ベースカラー70%・メインカラー25%・アクセントカラー5%」という配分の目安です。色数を絞り、明度と彩度で変化をつけると、まとまりのある配色になりやすいです。"}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"HEX・RGB・HSLの違いとは？配色の基礎知識","author":{"@type":"Organization","name":"かわたれ studio"},"publisher":{"@type":"Organization","name":"かわたれ studio"},"datePublished":"2026-07-25","dateModified":"2026-08-04","description":"HEX・RGB・HSLそれぞれの色の表し方の違いと使い分け、配色を考えるときの基礎知識を解説。"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"HEXとRGBはどちらを使うべきですか？","acceptedAnswer":{"@type":"Answer","text":"CSSではどちらも使えます。HEX（#FF0000）は短く書けるので広く使われ、RGBは透明度（アルファ値）を扱いたいときに rgba() の形で使うと便利です。デザインツール間の受け渡しはHEXが定番です。"}},{"@type":"Question","name":"HSLはどんな時に便利ですか？","acceptedAnswer":{"@type":"Answer","text":"色相（Hue）・彩度（Saturation）・明度（Lightness）で指定するため、「同じ色味で明るさだけ変える」「彩度だけ落とす」といった調整が直感的にできます。ボタンのホバー時に少し明るくする、といった実装で重宝します。"}},{"@type":"Question","name":"配色の基本ルールはありますか？","acceptedAnswer":{"@type":"Answer","text":"よく使われるのは「ベースカラー70%・メインカラー25%・アクセントカラー5%」という配分の目安です。色数を絞り、明度と彩度で変化をつけると、まとまりのある配色になりやすいです。"}},{"@type":"Question","name":"ダークモードの色はどう決めればよいですか？","acceptedAnswer":{"@type":"Answer","text":"ライトモードの色をそのまま反転させるのではなく、明度を調整し直すのが基本です。暗い背景の上では同じ色でも彩度が強く感じられるため、鮮やかすぎると目が疲れます。背景は真っ黒より少し明るい濃灰にし、ブランドカラーは明度を上げて読みやすさを確保すると自然に仕上がります。"}}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"こでっと","item":"https://kodetto.kawatare.studio/"},{"@type":"ListItem","position":2,"name":"HEX・RGB・HSLの違いとは？","item":"https://kodetto.kawatare.studio/article-color-design"}]}</script>
 <style>
   :root{--bg:#f4f6fb;--card:#ffffff;--ink:#161a22;--ink-2:#586074;--muted:#949cae;--line:#e5e8f0;
@@ -31,6 +31,7 @@
   .page-h1{font-size:25px;margin:4px 0 6px;line-height:1.4;} .lead{font-size:15px;color:var(--ink-2);margin:0 0 20px;}
   .cardp{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 24px;box-shadow:var(--shadow);}
   .prose h2{font-size:19px;margin:28px 0 10px;padding-bottom:6px;border-bottom:2px solid var(--line);} .prose h2:first-child{margin-top:4px;}
+  .prose h3{font-size:16px;margin:20px 0 6px;}
   .prose p{margin:8px 0;font-size:14.5px;} .prose ul{margin:8px 0;padding-left:22px;} .prose li{margin:6px 0;font-size:14.5px;}
   .prose table{width:100%;border-collapse:collapse;margin:10px 0;font-size:13.5px;} .prose td,.prose th{border:1px solid var(--line);padding:7px 10px;text-align:left;}
   .swatches{display:flex;gap:8px;margin:10px 0;flex-wrap:wrap;}
@@ -61,6 +62,10 @@
     <div class="sw" style="background:#7c5cff">#7c5cff</div>
   </div>
 
+  <h2>結論</h2>
+  <p>HEX・RGB・HSLは<b>同じ色を別の書き方で表しているだけ</b>で、どれかが優れているわけではありません。使い分けの基準はひとつ、「その色をこれからどう操作したいか」です。受け渡すだけならHEX、透明度を足すならRGB、明るさだけ変えるならHSL——これで実務の9割は判断できます。</p>
+  <p>配色に迷う原因の多くは、色を選ぶセンスではなく「同じ色味のまま明暗を作る手段を知らない」ことにあります。HSLを使えるようになると、この問題はほぼ解消します。</p>
+
   <h2>3つの表し方の違い</h2>
   <table><tr><th>表記</th><th>形式</th><th>向いている場面</th></tr>
   <tr><td>HEX</td><td>#RRGGBB（16進数）</td><td>短く書ける。デザインツール間の受け渡しの定番。</td></tr>
@@ -76,8 +81,28 @@
     <li><b>ホバー時に少し明るく／暗くしたいとき</b>：HSLの明度（L）だけを変える。</li>
   </ul>
 
+  <h2>HSLが効くのは「同じ色味で濃淡を作る」場面</h2>
+  <p>HSLは色を「色相（H：何色か、0〜360度）」「彩度（S：鮮やかさ、0〜100%）」「明度（L：明るさ、0〜100%）」の3つに分けて表します。この分け方の利点は、<b>3つのうち1つだけを動かせる</b>ことです。</p>
+  <p>たとえばボタンの通常時が <code>hsl(220,90%,55%)</code> なら、ホバー時は明度だけ下げて <code>hsl(220,90%,45%)</code> にすれば、色味はそのままで自然に暗くなります。同じことをHEXでやろうとすると、3つの2桁の数字をそれぞれ勘で調整することになり、色味がずれて濁りがちです。</p>
+  <p>UIの色を設計するときは、まずブランドカラーを1つ決めて、その明度を10%刻みで振ってパレットを作ると全体に統一感が出ます。<a href="tool-color">こでっとのカラーコード変換</a>でHEXをHSLに変換すれば、いま使っている色のH・S・Lがすぐ分かるので、そこから刻んでいけます。</p>
+
   <h2>配色を考えるときの目安</h2>
   <p>色数を増やしすぎるとまとまりがなくなりがちです。「ベースカラー70%・メインカラー25%・アクセントカラー5%」のような配分を目安に、明度・彩度で変化をつけると扱いやすくなります。</p>
+  <p>この配分でいうベースカラーは背景や余白の色、メインカラーは見出しやボタンなど画面の性格を決める色、アクセントカラーは「ここだけは見てほしい」場所に使う色です。アクセントを5%に抑えるのがコツで、目立たせたい要素が増えるほど、結果的にどれも目立たなくなります。</p>
+  <p>もうひとつ実務で外せないのが<b>文字と背景のコントラスト</b>です。薄いグレーの文字は上品に見えますが、明るい環境や視力の条件によっては読めなくなります。本文は背景との明度差を十分に取り、装飾的に薄くするのは補足情報だけに留めてください。ここはセンスではなく可読性の問題なので、迷ったら濃いほうを選ぶのが正解です。</p>
+
+  <h2>CSS変数で管理すると、あとが楽になる</h2>
+  <p>色をコードのあちこちに直接書くと、あとから調整するときに全ファイルを検索して回ることになります。CSSカスタムプロパティ（変数）にまとめておくと、変更が1箇所で済みます。</p>
+  <p>やり方は単純で、<code>:root</code> に <code>--brand:#4f6ef7;</code> のように定義し、使う側で <code>color:var(--brand);</code> と書くだけです。背景・文字・境界線・ブランドカラーくらいを変数にしておけば、ダークモード対応も <code>@media (prefers-color-scheme:dark)</code> の中で同じ変数名を上書きするだけで完了します。個別の要素に色を書いていると、この切り替えが一気に面倒になります。</p>
+  <p>命名は用途で付けるのがコツです。<code>--blue</code> のように色名で付けると、あとで青をやめたときに名前と実体がずれます。<code>--brand</code>（ブランド色）、<code>--ink</code>（文字色）、<code>--line</code>（境界線）のように役割で名付けておくと、色を変えても名前が破綻しません。</p>
+
+  <h2>つまずきやすい点</h2>
+  <ul>
+    <li><b>HEXの3桁表記を知らない</b>：<code>#fff</code> は <code>#ffffff</code> の省略形です。各桁を2回繰り返した値になるので、<code>#abc</code> は <code>#aabbcc</code> です。</li>
+    <li><b>rgbaのアルファ値を0〜255だと思う</b>：アルファ値は0〜1の小数です。半透明の黒は <code>rgba(0,0,0,0.4)</code> であって、0.4を40や102と書くと意図した表示になりません。</li>
+    <li><b>HSLの単位を書き忘れる</b>：彩度と明度にはパーセント記号が必要です。<code>hsl(220,90,55)</code> は無効で、<code>hsl(220,90%,55%)</code> と書きます。</li>
+    <li><b>色だけで情報を伝える</b>：「赤が必須項目」のように色だけに意味を持たせると、色の見え方が異なる人には伝わりません。アイコンや文言を併記してください。</li>
+  </ul>
 
   <h2>もっと体系的にデザインを学びたい場合</h2>
   <div class="pr">
@@ -87,6 +112,16 @@
     <p style="margin:6px 0 0"><a href="https://www.amazon.co.jp/s?k=%E9%85%8D%E8%89%B2%E3%81%AE%E6%95%99%E7%A7%91%E6%9B%B8" target="_blank" rel="noopener sponsored">配色の教科書を見る（Amazon）</a> ・ <a href="https://techacademy.jp/" target="_blank" rel="noopener sponsored">TechAcademy（公式サイト）</a></p>
   </div>
 
+  <h2>よくある質問</h2>
+  <h3>HEXとRGBはどちらを使うべきですか？</h3>
+  <p>透明度が必要ならRGB（正確にはRGBA）、必要なければHEXで構いません。表示される色は同じなので、どちらが正しいということはありません。デザインツールから受け取る値はHEXであることが多いので、まずHEXで受けて、透明度が要る箇所だけRGBAに書き換えるのが素直な進め方です。</p>
+  <h3>HSLはどんな時に便利ですか？</h3>
+  <p>「同じ色味のまま明るさだけ変えたい」ときです。ホバー時に少し暗くする、押下時にさらに暗くする、といった状態変化はHSLの明度（L）を数値で下げるだけで作れます。HEXで同じことをすると3つの数字を勘で調整することになり、色味がずれて濁りやすくなります。ブランドカラーから明度違いのパレットを作るときにも向いています。</p>
+  <h3>配色の基本ルールはありますか？</h3>
+  <p>「ベース70%・メイン25%・アクセント5%」の配分を目安にすると破綻しにくくなります。色数を増やすより、1色の明度・彩度を振って濃淡で差をつけるほうがまとまります。加えて、本文と背景のコントラストは装飾より優先してください。薄い文字は上品に見えますが、環境によっては読めなくなります。</p>
+  <h3>ダークモードの色はどう決めればよいですか？</h3>
+  <p>ライトモードの色をそのまま反転させるのではなく、明度を調整し直すのが基本です。暗い背景の上では同じ色でも彩度が強く感じられるため、鮮やかすぎると目が疲れます。背景は真っ黒より少し明るい濃灰にし、ブランドカラーは明度を上げて（HSLのLを大きく）読みやすさを確保すると自然に仕上がります。</p>
+
   <h2>関連ツール</h2>
   <div class="rel-grid">
     <a class="rel" href="tool-color">🎨 カラーコード変換 <span>HEX/RGB/HSLを相互変換</span></a>
@@ -95,7 +130,7 @@
 
   <div class="btnrow"><a class="cta" href="/">ツール一覧を見る</a></div>
   </div>
-  <footer><div><a href="/">ツール一覧</a>・<a href="about">このサイトについて</a>・<a href="privacy">プライバシー</a>・<a href="terms">利用規約</a>・<a href="https://kawatare.studio/">かわたれ studio</a></div><div>こでっと ・ 最終更新：2026-07-25</div></footer>
+  <footer><div><a href="/">ツール一覧</a>・<a href="about">このサイトについて</a>・<a href="privacy">プライバシー</a>・<a href="terms">利用規約</a>・<a href="https://kawatare.studio/">かわたれ studio</a></div><div>こでっと ・ 最終更新：2026-08-04</div></footer>
 </div>
 <!-- pwa:start -->
 <script>
