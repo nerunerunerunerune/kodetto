@@ -45,6 +45,10 @@
   .rel span{display:block;font-size:12px;color:var(--ink-2);font-weight:500;margin-top:2px;}
   footer{margin-top:46px;padding-top:18px;border-top:1px solid var(--line);font-size:13px;color:var(--muted);text-align:center;line-height:2;}
   footer a{color:var(--ink-2);text-decoration:none;margin:0 7px;}
+  .aff{background:var(--good-bg);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin:18px 0;}
+  .aff-tag{display:inline-block;font-size:11px;font-weight:800;color:#fff;background:var(--ink-2);padding:2px 8px;border-radius:5px;}
+  .aff-text{margin:8px 0 6px;font-size:13.5px;color:var(--ink-2);line-height:1.8;}
+  .aff-links{margin:0;font-size:13.5px;line-height:1.9;} .aff-links a{font-weight:800;}
 </style><script async src="https://www.googletagmanager.com/gtag/js?id=G-H0X1P2BBWH"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-H0X1P2BBWH');</script>
 </head><body>
@@ -105,12 +109,7 @@
   </ul>
 
   <h2>もっと体系的にデザインを学びたい場合</h2>
-  <div class="pr">
-    <span class="tag">PR</span>
-    <p style="margin:0 0 6px">配色や実務のWebデザインを体系的に学びたい方向けの例です。</p>
-    <!-- AFFILIATE SLOT: もしも/A8.net registration後、下記リンクをアフィリエイトタグ付きURLに置き換えること -->
-    <p style="margin:6px 0 0"><a href="https://www.amazon.co.jp/s?k=%E9%85%8D%E8%89%B2%E3%81%AE%E6%95%99%E7%A7%91%E6%9B%B8" target="_blank" rel="noopener sponsored">配色の教科書を見る（Amazon）</a> ・ <a href="https://techacademy.jp/" target="_blank" rel="noopener sponsored">TechAcademy（公式サイト）</a></p>
-  </div>
+  <div class="aff" data-aff="kodetto/article-color-design"><span class="aff-tag">PR</span><p class="aff-text">配色や実務のWebデザインを体系的に学びたい方向けの例です。</p><p class="aff-links"><a href="https://www.amazon.co.jp/s?k=%E9%85%8D%E8%89%B2%E3%81%AE%E6%95%99%E7%A7%91%E6%9B%B8" target="_blank" rel="noopener sponsored nofollow" data-aff-click="amazon_search">配色の教科書を見る（Amazon）</a> ・ <a href="https://techacademy.jp/" target="_blank" rel="noopener sponsored nofollow" data-aff-click="techacademy">TechAcademy（公式サイト）</a></p></div>
 
   <h2>よくある質問</h2>
   <h3>HEXとRGBはどちらを使うべきですか？</h3>
@@ -189,4 +188,23 @@ if(isIOS&&isSafari){setTimeout(function(){build('共有ボタン → 「ホー�
 })();
 </script>
 <!-- pwa:end -->
+<script>
+/* アフィリエイトのクリック計測。失敗してもリンク遷移は妨げない。 */
+(function(){
+  document.addEventListener('click', function(e){
+    try{
+      var a = e.target && e.target.closest && e.target.closest('a[data-aff-click]');
+      if(!a) return;
+      var slot = a.closest('.aff');
+      if(typeof gtag === 'function'){
+        gtag('event','affiliate_click',{
+          program: a.getAttribute('data-aff-click') || '',
+          slot: (slot && slot.getAttribute('data-aff')) || '',
+          link_url: a.href || ''
+        });
+      }
+    }catch(err){/* 計測の失敗は無視する */}
+  }, true);
+})();
+</script>
 </body></html>

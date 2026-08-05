@@ -42,6 +42,10 @@
   .rel span{display:block;font-size:12px;color:var(--ink-2);font-weight:500;margin-top:2px;}
   footer{margin-top:46px;padding-top:18px;border-top:1px solid var(--line);font-size:13px;color:var(--muted);text-align:center;line-height:2;}
   footer a{color:var(--ink-2);text-decoration:none;margin:0 7px;}
+  .aff{background:var(--good-bg);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin:18px 0;}
+  .aff-tag{display:inline-block;font-size:11px;font-weight:800;color:#fff;background:var(--ink-2);padding:2px 8px;border-radius:5px;}
+  .aff-text{margin:8px 0 6px;font-size:13.5px;color:var(--ink-2);line-height:1.8;}
+  .aff-links{margin:0;font-size:13.5px;line-height:1.9;} .aff-links a{font-weight:800;}
 </style><script async src="https://www.googletagmanager.com/gtag/js?id=G-H0X1P2BBWH"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-H0X1P2BBWH');</script>
 </head><body>
@@ -89,12 +93,7 @@
   <h2>体系的に学びたい場合の選択肢</h2>
   <p>独学で十分な人も多い一方、「我流のクセがついた」「実務に近い課題で練習したい」という場合は、カリキュラムに沿って学べるプログラミングスクールを使うのも一つの手です。判断の目安としては、正規表現そのものが目的なら独学で足り、Webアプリの設計まで含めて仕事にしたいなら体系的に学ぶ価値がある、と考えると整理しやすくなります。</p>
 
-  <div class="pr">
-    <span class="tag">PR</span>
-    <p style="margin:0 0 6px">実務に近い課題で正規表現やAPI設計まで学びたい方向けのスクール例です。リンク先で無料相談・カリキュラムを確認できます。</p>
-    <!-- AFFILIATE SLOT: A8.net registration後、下記リンクをアフィリエイトタグ付きURLに置き換えること -->
-    <p style="margin:6px 0 0"><a href="https://www.sejuku.net/" target="_blank" rel="noopener sponsored">侍エンジニア塾（公式サイト）</a> ・ <a href="https://techacademy.jp/" target="_blank" rel="noopener sponsored">TechAcademy（公式サイト）</a></p>
-  </div>
+  <div class="aff" data-aff="kodetto/article-regex-learning"><span class="aff-tag">PR</span><p class="aff-text">実務に近い課題で正規表現やAPI設計まで学びたい方向けのスクール例です。リンク先で無料相談・カリキュラムを確認できます。</p><p class="aff-links"><a href="https://www.sejuku.net/" target="_blank" rel="noopener sponsored nofollow" data-aff-click="sejuku">侍エンジニア塾（公式サイト）</a> ・ <a href="https://techacademy.jp/" target="_blank" rel="noopener sponsored nofollow" data-aff-click="techacademy">TechAcademy（公式サイト）</a></p></div>
 
   <h2>よくある質問</h2>
   <h3>正規表現はどこから学べばいいですか？</h3>
@@ -173,4 +172,23 @@ if(isIOS&&isSafari){setTimeout(function(){build('共有ボタン → 「ホー�
 })();
 </script>
 <!-- pwa:end -->
+<script>
+/* アフィリエイトのクリック計測。失敗してもリンク遷移は妨げない。 */
+(function(){
+  document.addEventListener('click', function(e){
+    try{
+      var a = e.target && e.target.closest && e.target.closest('a[data-aff-click]');
+      if(!a) return;
+      var slot = a.closest('.aff');
+      if(typeof gtag === 'function'){
+        gtag('event','affiliate_click',{
+          program: a.getAttribute('data-aff-click') || '',
+          slot: (slot && slot.getAttribute('data-aff')) || '',
+          link_url: a.href || ''
+        });
+      }
+    }catch(err){/* 計測の失敗は無視する */}
+  }, true);
+})();
+</script>
 </body></html>

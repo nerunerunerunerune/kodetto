@@ -43,6 +43,10 @@
   .rel span{display:block;font-size:12px;color:var(--ink-2);font-weight:500;margin-top:2px;}
   footer{margin-top:46px;padding-top:18px;border-top:1px solid var(--line);font-size:13px;color:var(--muted);text-align:center;line-height:2;}
   footer a{color:var(--ink-2);text-decoration:none;margin:0 7px;}
+  .aff{background:var(--good-bg);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin:18px 0;}
+  .aff-tag{display:inline-block;font-size:11px;font-weight:800;color:#fff;background:var(--ink-2);padding:2px 8px;border-radius:5px;}
+  .aff-text{margin:8px 0 6px;font-size:13.5px;color:var(--ink-2);line-height:1.8;}
+  .aff-links{margin:0;font-size:13.5px;line-height:1.9;} .aff-links a{font-weight:800;}
 </style><script async src="https://www.googletagmanager.com/gtag/js?id=G-H0X1P2BBWH"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-H0X1P2BBWH');</script>
 </head><body>
@@ -103,12 +107,7 @@
   </ul>
   <p>判断の軸は「OSの管理を自分でやりたいか」の一点に絞ると迷いません。やりたくない・時間を使いたくないならレンタルサーバー、構成を自由に決めたい・学習も兼ねたいならVPSです。なお、決まった時刻に短い処理を動かすだけなら、クラウドの定期実行サービスを使ってサーバー自体を持たない選択肢もあります。</p>
 
-  <div class="pr">
-    <span class="tag">PR</span>
-    <p style="margin:0 0 6px">個人開発・自動化の置き場所を探している方向けのサーバー例です。料金・スペックは公式サイトでご確認ください。</p>
-    <!-- AFFILIATE SLOT: A8.net registration後、下記リンクをアフィリエイトタグ付きURLに置き換えること -->
-    <p style="margin:6px 0 0"><a href="https://www.xserver.ne.jp/" target="_blank" rel="noopener sponsored">エックスサーバー（公式サイト）</a> ・ <a href="https://www.conoha.jp/vps/" target="_blank" rel="noopener sponsored">ConoHa VPS（公式サイト）</a></p>
-  </div>
+  <div class="aff" data-aff="kodetto/article-cron-server"><span class="aff-tag">PR</span><p class="aff-text">個人開発・自動化の置き場所を探している方向けのサーバー例です。料金・スペックは公式サイトでご確認ください。</p><p class="aff-links"><a href="https://www.xserver.ne.jp/" target="_blank" rel="noopener sponsored nofollow" data-aff-click="xserver">エックスサーバー（公式サイト）</a> ・ <a href="https://www.conoha.jp/vps/" target="_blank" rel="noopener sponsored nofollow" data-aff-click="conoha">ConoHa VPS（公式サイト）</a></p></div>
 
   <h2>cron以外の選択肢も知っておく</h2>
   <p>定期実行の手段はcronだけではありません。常時起動のサーバーを持たずに済むなら、そのほうが運用は軽くなります。GitHubにコードを置いているならGitHub Actionsのスケジュール実行、クラウドを使うならマネージドの定期実行サービス、Linuxサーバー上でより細かく制御したいならsystemdのタイマーという選択肢があります。</p>
@@ -191,4 +190,23 @@ if(isIOS&&isSafari){setTimeout(function(){build('共有ボタン → 「ホー�
 })();
 </script>
 <!-- pwa:end -->
+<script>
+/* アフィリエイトのクリック計測。失敗してもリンク遷移は妨げない。 */
+(function(){
+  document.addEventListener('click', function(e){
+    try{
+      var a = e.target && e.target.closest && e.target.closest('a[data-aff-click]');
+      if(!a) return;
+      var slot = a.closest('.aff');
+      if(typeof gtag === 'function'){
+        gtag('event','affiliate_click',{
+          program: a.getAttribute('data-aff-click') || '',
+          slot: (slot && slot.getAttribute('data-aff')) || '',
+          link_url: a.href || ''
+        });
+      }
+    }catch(err){/* 計測の失敗は無視する */}
+  }, true);
+})();
+</script>
 </body></html>
